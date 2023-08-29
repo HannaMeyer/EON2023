@@ -53,11 +53,11 @@ website:
           - mc_session/mc1.qmd
           - mc_session/mc2.qmd
           - href: https://www.komoot.de/tour/1283135618?ref=wtd&share_token=a3DGxlqnl4tgjndhw9ThgHQllieM6BTzD2BSbyXKRUlAWNn3ZB
-            text: Stations
+            text: Station Map
           - href: https://www.ecowitt.net/home/index?id=149300
-            text: Forest
+            text: ClearingData (Ecowitt Login required)
           - href: https://www.ecowitt.net/home/index?id=20166
-            text: Clearing 
+            text: Forest Data (Ecowitt Login required)
           - mc_session/mc3.qmd
 #format: dokuwiki
 format:
