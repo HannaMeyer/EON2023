@@ -1,1 +1,1 @@
-Sitemap: https://HannaMeyer.github.io/EON2023/sitemap.xml
+Sitemap: https://hannameyer.github.io/EON2023/sitemap.xml

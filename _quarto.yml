@@ -2,12 +2,13 @@ project:
   type: website
   output-dir: docs
   
+  
 website:
   open-graph: true
   page-navigation: true  
   title: "EON Summer School 2023"
-  site-url: https://HannaMeyer.github.io/EON2023
-  repo-url: https://HannaMeyer.com/EON2023
+  site-url: https://hannameyer.github.io/EON2023
+  repo-url: https://github.com/HannaMeyer/EON2023
   repo-actions: [edit, issue]
   search: 
     location: navbar
@@ -52,6 +53,12 @@ website:
           - mc_session/mc1.qmd
           - mc_session/mc2.qmd
           - mc_session/mc3.qmd
+          - href: https://www.komoot.de/tour/1283135618?ref=wtd&share_token=a3DGxlqnl4tgjndhw9ThgHQllieM6BTzD2BSbyXKRUlAWNn3ZB
+            text: Stations
+          - href: https://www.ecowitt.net/home/index?id=149300
+            text: Forest
+          - href: https://www.ecowitt.net/home/index?id=20166
+            text: Clearing          
 #format: dokuwiki
 format:
   html:
