@@ -1,5 +1,5 @@
 ---
-title: "Power Supply"
+title: "Spatial Interpolation"
 image: ../images/../images/battery_box/top_box.jpg
 
 about:
