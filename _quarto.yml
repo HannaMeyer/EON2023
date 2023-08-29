@@ -52,13 +52,13 @@ website:
         contents:
           - mc_session/mc1.qmd
           - mc_session/mc2.qmd
-          - mc_session/mc3.qmd
           - href: https://www.komoot.de/tour/1283135618?ref=wtd&share_token=a3DGxlqnl4tgjndhw9ThgHQllieM6BTzD2BSbyXKRUlAWNn3ZB
             text: Stations
           - href: https://www.ecowitt.net/home/index?id=149300
             text: Forest
           - href: https://www.ecowitt.net/home/index?id=20166
-            text: Clearing          
+            text: Clearing 
+          - mc_session/mc3.qmd
 #format: dokuwiki
 format:
   html:
