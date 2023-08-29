@@ -516,5 +516,19 @@
     "title": "Power Supply",
     "section": "Risk Assessment",
     "text": "Risk Assessment\nHere you find the preliminary risk assesment for the installation and operation of 12 V solar power based energy supply units and measuring sensor systems."
+  },
+  {
+    "objectID": "index.html#datasets",
+    "href": "index.html#datasets",
+    "title": "Welcome EON Summer School 2023 (28.8-01.09-2023)",
+    "section": "Datasets",
+    "text": "Datasets\n\nAirborne Laser Scanning (ALS) data ca. 2016\nUAV RGB & multispectral data 2022 2023\nDOP (20cm)\nPlanetScope Scene (R,G,B,NIR) covering the entire Harz from 24.08.2022\nDigitial elevation model (25m) from https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1 covering the entire Harz"
+  },
+  {
+    "objectID": "index.html#sensors-equipment",
+    "href": "index.html#sensors-equipment",
+    "title": "Welcome EON Summer School 2023 (28.8-01.09-2023)",
+    "section": "Sensors & Equipment",
+    "text": "Sensors & Equipment\n\nHAWK:\n\nMavic 3 (Enterprise + Thermal + Multispectral)\nGNSS (Emlid, Alberding, Garmin)\nTablets (Android)\nForest Measurement Devices (diameter tapes, calipers, vertex, laser range finders, …)\nGeoSlam Mobile Laser Scanner\n\nUni Münster:\n\nMica Sens red edge (Multispektral)\nWIRIS thermal camera\nL1 Lidar (Dji)\nSony Alpha (42mp) RGB camera\nppm 10xx GNSS Sensor\n\n\n\n\n\n\n\n\n# Programm (Draft) * Monday (Waldhaus): * 12-13:00 Check-in @ “The Cabin” (Waldhaus) Oderbrück * 14:00h Welcome & Introduction * 15:30-18:00h Conceptional project development (all)\n\n\n* Tuesday (Waldhaus & Excursion): * 09:00-12:00 Excursion with local forest district manager to get an introduce to the Harz region and its current situation * 12:30 Lunch (Waldhaus) * 14:00-16:00 Group work * 16:00-18:00 Block 1 Collection of reference data in the context of forest monitoring (Paul Magdon, HAWK)\n\n\n* Wednesday (Waldhaus & Excursion): * 9:00:10:00 Block 2 Measuring microclimate with mobile climate station (Chris Reudenbach, Uni Marburg) * 10:30-12:00 Block 3 Modelling microclimate (Chris Reudenbach, Uni Marburg) * 12:00 Lunch * 13:00 - Joint data collections campaign @ Polstertalerhubhaus\n\n\n* Thursday (Waldhaus): * 9:00-12:00 Exkursion to National Park Harz and meeting with park researchers * 12:00-13:00 Lunch * 13:00-15:00 Block 5 “Machine learning and validation” (Hanna Meyer, Uni Münster) * 15:00- Group work * evening Block 6 human sensing of the environment (a.k.a walk & talk)\n\n\n* Friday (Waldhaus): * 09:00-11:00 Group work * 11:00-12:00 Presentation of the group work * 12:00-13:00 Workshop closing / evaluation * 14:00 pm Departure"
   }
 ]
