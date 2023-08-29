@@ -6,7 +6,7 @@ website:
   open-graph: true
   page-navigation: true  
   title: "EON Summer School 2023"
-  site-url: https://HannaMeyer.github.io/EON2023
+  site-url: https://hannameyer.github.io/EON2023
   repo-url: https://github.com/HannaMeyer/EON2023
   repo-actions: [edit, issue]
   search: 
