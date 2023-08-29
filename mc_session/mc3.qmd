@@ -1,0 +1,144 @@
+---
+title: "Power Supply"
+image: ../images/../images/battery_box/top_box.jpg
+
+about:
+  id: image-heading
+  template: solana
+  image-shape: round
+  image-width: 10em
+---
+::: {#image-heading}
+
+:::
+
+```{r start, message=FALSE, warning=FALSE}
+#------------------------------------------------------------------------------
+# Name: FR_soilmoist.R
+# Type: control script 
+# Author: Chris Reudenbach, creuden@gmail.com
+# Description:  calculates the soil moisture from Lacanau point data
+# Copyright:GPL (>= 3) 
+# Date: 2022-11-10 
+# V-2022-11-12; 
+#------------------------------------------------------------------------------
+# 0 - project setup
+#------------------------------------------------------------------------------
+# geoAI course basic setup
+# Type: script
+# Name: geoAI_setup.R
+# Author: Chris Reudenbach, creuden@gmail.com
+# Description:  create/read project folder structure and returns pathes as list
+#               load all necessary packages 
+#               sources all functions in a defined function folder
+# Dependencies:   
+# Output: list containing the folder strings as shortcuts
+# Copyright: Chris Reudenbach, thomas Nauss 2019-2021, GPL (>= 3)
+# git clone https://github.com/gisma-courses/geoAI-scripts.git
+#------------------------------------------------------------------------------
+
+
+
+# basic packages
+library("mapview")
+library("tmap")
+library("tmaptools")
+library("raster")
+library("terra")
+library("sf")
+library("dplyr")
+library("lidR")
+library("future")
+library("lwgeom")
+library("tmap")
+library("mapview")
+library(rprojroot)
+
+root_folder = find_rstudio_root_file()
+#root_folder = getwd()
+ndvi.col = function(n) {
+  rev(colorspace::sequential_hcl(n, "Green-Yellow"))
+}
+
+ano.col = colorspace::diverging_hcl(7, palette = "Red-Green",  register = "rg")
+
+
+## set temp path to speed up raster package operations
+raster::rasterOptions(tmpdir = envrmt$path_tmp)
+
+# suppres gdal warnings
+rgdal::set_thin_PROJ6_warnings(TRUE)
+
+
+
+# workaround subfolder
+loc_name = "harz"
+
+# harz
+epsg=25833
+
+attributename = c("Moisture_1_17Nov","Moisture_2_17Nov","Moisture_1_19Nov","Moisture_2_19Nov")
+varname = c("soilmoist2022_08_17","soilmoist2022_08_19")
+fnDTM = "DTM_v3.vrt"
+fnsm_data = "lacanau_moisture_measurements.csv"
+fnpos_data= "ltrees.gpkg"
+
+# read DTM
+DTM = terra::rast(fnDTM)
+# cast to SpatialPixelsDataFrame
+DTM.spdf <- as(raster(DTM),
+                       'SpatialPixelsDataFrame')
+colnames(DTM.spdf@data) <- "altitude"
+# read moist data 
+sm=read.csv2(fnsm_data,sep = ",")
+# read tree data
+pos=st_read(fnpos_data)
+# merge
+sm$Point = paste0("TREE",str_split_fixed(sm$TargetID, "_", 3)[,3])
+m=merge(pos,sm)
+
+# extract altitudes for positions
+em= exactextractr::exact_extract(DTM,st_buffer(m,1),"mean")
+m$altitude=em
+
+# start kriging 
+for (i in 1:length(varname) ){
+  z=i*2
+  # mean
+  m$var = (as.numeric(m[[attributename[z-1]]]) + as.numeric(m[[attributename[z]]]))/2
+  # to sp
+  m2 = as(m,"Spatial")    
+  tm2 = spTransform(m2,
+                    crs("+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))
+
+  # autofit variogramm for kriging 
+  vm.auto = automap::autofitVariogram(formula = as.formula(paste("var", "~ 1")),
+                                      input_data = tm2)
+  plot(vm.auto)
+  
+  # kriging   
+  print(paste0("kriging ", varname[i]))
+  var.pred <- gstat::krige(formula = as.formula(paste("var", "~ altitude")),
+                           locations = tm2,
+                           newdata = DTM.spdf,
+                           model = vm.auto$var_model,
+                           debug.level=0,)
+  
+  r=rasterFromXYZ(as.data.frame(var.pred)[, c("x", "y", "var1.pred")])
+  
+  # reclassify erratic values 
+  reclass_df <- c(-Inf, 0, NA)
+  # reshape the object into a matrix with columns and rows
+  reclass_m <- matrix(reclass_df,
+                      ncol = 3,
+                      byrow = TRUE)
+  r_c <- reclassify(r,reclass_m)
+
+  plot(r_c)
+  # re assign crs
+  crs(r_c) = crs(paste0("EPSG:",epsg))
+  raster::writeRaster(r_c,paste0("data/gis/France_Lacanau_PP_Gis/data_lev0/",varname[i],".tif"),overwrite=TRUE)
+  
+}
+
+```

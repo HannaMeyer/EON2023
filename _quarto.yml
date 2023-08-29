@@ -1,0 +1,70 @@
+project: 
+  type: website
+  output-dir: docs
+  
+website:
+  open-graph: true
+  page-navigation: true  
+  title: "EON Summer School 2023"
+  site-url: https://HannaMeyer.github.io/EON2023
+  repo-url: https://HannaMeyer.com/EON2023
+  repo-actions: [edit, issue]
+  search: 
+    location: navbar
+    type: textbox
+  page-footer: "xyz (2021)" 
+  twitter-card:
+    creator: "@yxz"
+  # comments:
+  #   utterances:
+  #     repo: yourgithubname/yourreponame
+  navbar:
+    logo: /images/logooil.jpg
+    left:
+      - icon: question-square-fill
+        text: FAQ
+        href: base/faq.qmd
+      - icon: file-slides-fill
+        text: Slides
+        href: slides/slidelist.qmd
+
+  sidebar:
+    # logo: /images/logo.jpg
+    pinned: true
+    align: center
+    style: "docked"
+    collapse-level: 1
+    contents:
+      - section: "Welcome"
+        contents:
+          - index.md
+      - text: "---"
+      - section: "Machine Learning"
+        contents:
+          - Machine_Learning_Session/ML_AOA.qmd
+          # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-introduction/
+          #   text: Basic Readings        
+          # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-fieldwork/
+          #   text: uav/Flight Planning
+      - text: "---"
+      - section: "Microclimate"
+        contents:
+          - mc_session/mc1.qmd
+          - mc_session/mc2.qmd
+          - mc_session/mc3.qmd
+#format: dokuwiki
+format:
+  html:
+    theme:
+      light: lumen
+      dark: [lumen, css/theme-dark.scss]
+    code-background: true
+    code-copy: true
+    css: css/styles.css
+    toc: true
+    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: '^(?:http:|https:)\/\/www\.quarto\.org\/custom'
+# filters:
+#   - include-files.lua
+#   - quarto

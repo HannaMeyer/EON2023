@@ -1,0 +1,11 @@
+---
+title: "Git, GitHub & Rstudio [DE]"
+subtitle: English Version
+---
+
+
+![](../images/github-Rstudio.jpg){width="50%"}
+
+<iframe width="120%" height="960" src="https://gisma.shinyapps.io/rstudio-github-git/" frameborder="0"> </iframe>
+
+  
