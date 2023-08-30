@@ -152,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
- <span class="menu-text">Machine Learning</span></a>
+ <span class="menu-text">Training Data</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -160,8 +160,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Machine_Learning_Session/ML_AOA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Machine learning for remote sensing applications</span></a>
+  <a href="./paul_tutorial/01_TrainingDataCollection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collection of training data for remote sensing model building</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./paul_tutorial/02_ValidationDataCollection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collection of validation data in the context of remote sensing based forest monitoring</span></a>
   </div>
 </li>
       </ul>
@@ -170,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
- <span class="menu-text">Microclimate</span></a>
+ <span class="menu-text">Microclimate &amp; Interpolation</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -214,6 +220,25 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Machine_Learning_Session/ML_AOA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine learning for remote sensing applications</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
     </ul>
     </div>
 </nav>
@@ -225,14 +250,13 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#welcome-eon-summer-school-2023-28.8-01.09-2023" id="toc-welcome-eon-summer-school-2023-28.8-01.09-2023" class="nav-link active" data-scroll-target="#welcome-eon-summer-school-2023-28.8-01.09-2023">Welcome EON Summer School 2023 (28.8-01.09-2023)</a></li>
-  <li><a href="#project-suggestions" id="toc-project-suggestions" class="nav-link" data-scroll-target="#project-suggestions">Project suggestions</a></li>
   <li><a href="#area-of-interest" id="toc-area-of-interest" class="nav-link" data-scroll-target="#area-of-interest">Area of Interest</a></li>
   <li><a href="#datasets-sensors" id="toc-datasets-sensors" class="nav-link" data-scroll-target="#datasets-sensors">Datasets &amp; Sensors</a>
   <ul class="collapse">
   <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a></li>
   <li><a href="#sensors-equipment" id="toc-sensors-equipment" class="nav-link" data-scroll-target="#sensors-equipment">Sensors &amp; Equipment</a></li>
   </ul></li>
-  <li><a href="#accomondation" id="toc-accomondation" class="nav-link" data-scroll-target="#accomondation">Accomondation</a></li>
+  <li><a href="#programm-draft" id="toc-programm-draft" class="nav-link" data-scroll-target="#programm-draft">Programm (Draft)</a></li>
   <li><a href="#catering" id="toc-catering" class="nav-link" data-scroll-target="#catering">Catering</a></li>
   <li><a href="#what-to-bring" id="toc-what-to-bring" class="nav-link" data-scroll-target="#what-to-bring">What to bring?</a></li>
   </ul>
@@ -251,12 +275,28 @@ ul.task-list li input[type="checkbox"] {
 }
   
 </style>
-<p><img src="./images/clausiwood.png" class="img-fluid"></p>
 <section id="welcome-eon-summer-school-2023-28.8-01.09-2023" class="level1">
 <h1>Welcome EON Summer School 2023 (28.8-01.09-2023)</h1>
-</section>
-<section id="project-suggestions" class="level1">
-<h1>Project suggestions</h1>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/clausiwood.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Polsterberger Hubhaus 2022</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/2023.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Polsterberger Hubhaus 2023</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="area-of-interest" class="level1">
 <h1>Area of Interest</h1>
@@ -266,7 +306,7 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="https://pad.gwdg.de/uploads/632f2325-7a43-447e-8a23-1eb989b9218f.png" class="img-fluid"></p>
 <p>You can download the geopackage with the AOI here:</p>
 <p>https://cloud.hawk.de/index.php/s/yomQwefzLDwyTa6</p>
-<p>You can view UAV-images provided by Dr.&nbsp;Hans Fuchs from University of Göttingen here ( <em>to view the online maps in Firefox browsert you need to accept unsecure connections in the panel left of the url (lock symbol)</em>):</p>
+<p>You can view UAV-images provided by Dr.&nbsp;Hans Fuchs from University of Göttingen here ( <em>to view the online maps in Firefox browser you need to accept unsecure connections in the panel left of the url (lock symbol)</em>):</p>
 <p>https://wwwuser.gwdg.de/~hfuchs/projekte/polsterberg/</p>
 </section>
 <section id="datasets-sensors" class="level1">
@@ -301,33 +341,48 @@ ul.task-list li input[type="checkbox"] {
 <li>ppm 10xx GNSS Sensor</li>
 </ul></li>
 </ul>
-<table class="table">
-<colgroup>
-<col style="width: 12%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td># Programm (Draft) * Monday (Waldhaus): * 12-13:00 Check-in @ “The Cabin” (Waldhaus) Oderbrück * 14:00h Welcome &amp; Introduction * 15:30-18:00h Conceptional project development (all)</td>
-</tr>
-<tr class="even">
-<td>* Tuesday (Waldhaus &amp; Excursion): * 09:00-12:00 <strong>Excursion with local forest district manager</strong> to get an introduce to the Harz region and its current situation * 12:30 Lunch (Waldhaus) * 14:00-16:00 Group work * 16:00-18:00 <strong>Block 1 Collection of reference data</strong> in the context of forest monitoring (Paul Magdon, HAWK)</td>
-</tr>
-<tr class="odd">
-<td>* Wednesday (Waldhaus &amp; Excursion): * 9:00:10:00 <strong>Block 2 Measuring microclimate with mobile climate station</strong> (Chris Reudenbach, Uni Marburg) * 10:30-12:00 <strong>Block 3 Modelling microclimate</strong> (Chris Reudenbach, Uni Marburg) * 12:00 Lunch * 13:00 - <strong>Joint data collections campaign</strong> @ Polstertalerhubhaus</td>
-</tr>
-<tr class="even">
-<td>* Thursday (Waldhaus): * 9:00-12:00 <strong>Exkursion to National Park Harz</strong> and meeting with park researchers * 12:00-13:00 Lunch * 13:00-15:00 <strong>Block 5 “Machine learning and validation”</strong> (Hanna Meyer, Uni Münster) * 15:00- Group work * evening <strong>Block 6 human sensing of the environment</strong> (a.k.a walk &amp; talk)</td>
-</tr>
-<tr class="odd">
-<td>* Friday (Waldhaus): * 09:00-11:00 Group work * 11:00-12:00 <strong>Presentation of the group work</strong> * 12:00-13:00 Workshop closing / evaluation * 14:00 pm Departure</td>
-</tr>
-</tbody>
-</table>
+<hr>
 </section>
 </section>
-<section id="accomondation" class="level1">
-<h1>Accomondation</h1>
+<section id="programm-draft" class="level1">
+<h1>Programm (Draft)</h1>
 <ul>
+<li>Monday (Waldhaus):
+<ul>
+<li>12-13:00 Check-in @ “The Cabin” (Waldhaus) Oderbrück</li>
+<li>14:00h Welcome &amp; Introduction</li>
+<li>15:30-18:00h Conceptional project development (all)</li>
+</ul></li>
+<li>Tuesday (Waldhaus &amp; Excursion):
+<ul>
+<li>09:00-12:00 <strong>Excursion with local forest district manager</strong> to get an introduce to the Harz region and its current situation</li>
+<li>12:30 Lunch (Waldhaus)</li>
+<li>14:00-16:00 Group work</li>
+<li>16:00-18:00 <strong>Block 1 Collection of reference data</strong> in the context of forest monitoring (Paul Magdon, HAWK)</li>
+</ul></li>
+<li>Wednesday (Waldhaus &amp; Excursion):
+<ul>
+<li>9:00-12:00 <strong>Exkursion to National Park Harz</strong> and meeting with park researchers</li>
+<li>13:00 Lunch</li>
+<li>14:00 - <strong>Joint data collections campaign</strong> @ Polstertalerhubhaus</li>
+</ul></li>
+<li>Thursday (Waldhaus):
+<ul>
+<li>9:00:10:00 <strong>Block 2 Measuring microclimate with mobile climate station</strong> (Chris Reudenbach, Uni Marburg)</li>
+<li>10:30-12:00 <strong>Block 3 Modelling microclimate</strong> (Chris Reudenbach, Uni Marburg)</li>
+<li>12:00-13:00 Lunch</li>
+<li>13:00-15:00 <strong>Block 4 “Machine learning and validation”</strong> (Hanna Meyer, Uni Münster)</li>
+<li>15:00- Group work</li>
+<li>evening <strong>Block 5 human sensing of the environment</strong> (a.k.a walk &amp; talk)</li>
+</ul></li>
+<li>Friday (Waldhaus):
+<ul>
+<li>09:00-11:00 Group work</li>
+<li>11:00-12:00 <strong>Presentation of the group work</strong></li>
+<li>12:00-13:00 Workshop closing / evaluation</li>
+<li><h2 id="pm-departure" class="anchored" data-anchor-id="programm-draft">14:00 pm Departure</h2>
+<h1 id="accomondation">Accomondation</h1></li>
+</ul></li>
 <li>We will stay @ The Cabin Oderbrück: https://oderbrueck.de/uebernachten-2/the-cabin-oderbrueck</li>
 <li>Costs: 25€/Person/Night, we will collect the money in cash from you.</li>
 </ul>
