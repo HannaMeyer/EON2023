@@ -40,15 +40,12 @@ website:
         contents:
           - index.md
       - text: "---"
-      - section: "Machine Learning"
-        contents:
-          - Machine_Learning_Session/ML_AOA.qmd
-          # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-introduction/
-          #   text: Basic Readings        
-          # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-fieldwork/
-          #   text: uav/Flight Planning
+      - section: "Training Data"
+        contents: 
+          - paul_tutorial/01_TrainingDataCollection.qmd
+          - paul_tutorial/02_ValidationDataCollection.qmd
       - text: "---"
-      - section: "Microclimate"
+      - section: "Microclimate & Interpolation"
         contents:
           - mc_session/mc1.qmd
           - mc_session/mc2.qmd
@@ -59,7 +56,16 @@ website:
           - href: https://www.ecowitt.net/home/index?id=20166
             text: Forest Data (Ecowitt Login required)
           - mc_session/mc3.qmd
-#format: dokuwiki
+      - text: "---"
+      - section: "Machine Learning"
+        contents:
+          - Machine_Learning_Session/ML_AOA.qmd
+          # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-introduction/
+          #   text: Basic Readings        
+          # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-fieldwork/
+          #   text: uav/Flight Planning
+      - text: "---"
+##format: dokuwiki
 format:
   html:
     theme:

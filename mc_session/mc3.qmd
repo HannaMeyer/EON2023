@@ -1,6 +1,6 @@
 ---
 title: "Spatial Interpolation"
-image: ../images/../images/battery_box/top_box.jpg
+image: ../images/mc3.png
 
 about:
   id: image-heading
@@ -33,8 +33,7 @@ test
 #               sources all functions in a defined function folder
 # Dependencies:   
 # Output: list containing the folder strings as shortcuts
-# Copyright: Chris Reudenbach, thomas Nauss 2019-2021, GPL (>= 3)
-# git clone https://github.com/gisma-courses/geoAI-scripts.git
+# Copyright: Chris Reudenbach, GPL (>= 3)
 #------------------------------------------------------------------------------
 
 
@@ -52,92 +51,160 @@ library("future")
 library("lwgeom")
 library("tmap")
 library("mapview")
+library(readxl)
+library(highfrequency)
+library(tidyverse)
 library(rprojroot)
+library(xts)
+library(sp)
 
 root_folder = find_rstudio_root_file()
 #root_folder = getwd()
 ndvi.col = function(n) {
   rev(colorspace::sequential_hcl(n, "Green-Yellow"))
 }
-
 ano.col = colorspace::diverging_hcl(7, palette = "Red-Green",  register = "rg")
 
+time_period = 3
+fnDTM = "copernicus_DEM.tif"
+fn_dataFC29 = "all_GW1000A-WIFIFC29(202308270000-202308292319).xlsx"
+fn_dataDB2F ="all_GW1000A-WIFIDB2F(202308270000-202308292219).xlsx"
+fn_pos_data= "stations_prelim.shp"
 
-
-
-# # suppres gdal warnings
-# rgdal::set_thin_PROJ6_warnings(TRUE)
-# 
-# 
-# 
-# # workaround subfolder
-# loc_name = "harz"
-# 
-# # harz
-# epsg=25833
-# 
-# attributename = c("Moisture_1_17Nov","Moisture_2_17Nov","Moisture_1_19Nov","Moisture_2_19Nov")
-# varname = c("soilmoist2022_08_17","soilmoist2022_08_19")
-# fnDTM = "DTM_v3.vrt"
-# fnsm_data = "lacanau_moisture_measurements.csv"
-# fnpos_data= "ltrees.gpkg"
-# 
 # # read DTM
-# DTM = terra::rast(fnDTM)
+DTM = terra::rast(fnDTM)
 # # cast to SpatialPixelsDataFrame
-# DTM.spdf <- as(raster(DTM),
-#                        'SpatialPixelsDataFrame')
-# colnames(DTM.spdf@data) <- "altitude"
-# # read moist data 
-# sm=read.csv2(fnsm_data,sep = ",")
-# # read tree data
-# pos=st_read(fnpos_data)
-# # merge
-# sm$Point = paste0("TREE",str_split_fixed(sm$TargetID, "_", 3)[,3])
-# m=merge(pos,sm)
-# 
-# # extract altitudes for positions
-# em= exactextractr::exact_extract(DTM,st_buffer(m,1),"mean")
-# m$altitude=em
-# 
-# # start kriging 
-# for (i in 1:length(varname) ){
-#   z=i*2
-#   # mean
-#   m$var = (as.numeric(m[[attributename[z-1]]]) + as.numeric(m[[attributename[z]]]))/2
-#   # to sp
-#   m2 = as(m,"Spatial")    
-#   tm2 = spTransform(m2,
-#                     crs("+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))
-# 
-#   # autofit variogramm for kriging 
-#   vm.auto = automap::autofitVariogram(formula = as.formula(paste("var", "~ 1")),
-#                                       input_data = tm2)
-#   plot(vm.auto)
-#   
-#   # kriging   
-#   print(paste0("kriging ", varname[i]))
-#   var.pred <- gstat::krige(formula = as.formula(paste("var", "~ altitude")),
-#                            locations = tm2,
-#                            newdata = DTM.spdf,
-#                            model = vm.auto$var_model,
-#                            debug.level=0,)
-#   
-#   r=rasterFromXYZ(as.data.frame(var.pred)[, c("x", "y", "var1.pred")])
-#   
-#   # reclassify erratic values 
-#   reclass_df <- c(-Inf, 0, NA)
-#   # reshape the object into a matrix with columns and rows
-#   reclass_m <- matrix(reclass_df,
-#                       ncol = 3,
-#                       byrow = TRUE)
-#   r_c <- reclassify(r,reclass_m)
-# 
-#   plot(r_c)
-#   # re assign crs
-#   crs(r_c) = crs(paste0("EPSG:",epsg))
-#   raster::writeRaster(r_c,paste0("data/gis/France_Lacanau_PP_Gis/data_lev0/",varname[i],".tif"),overwrite=TRUE)
-#   
-# }
+DTM.spdf <- as(raster(DTM),'SpatialPixelsDataFrame')
+colnames(DTM.spdf@data) <- "altitude"
+crs(DTM.spdf)="+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs "
+ 
+# # read tempperature data 
+clim_dataFC29 <- as_tibble(read_excel(fn_dataFC29, skip = 1))
+clim_dataDB2F <- as_tibble(read_excel(fn_dataDB2F, skip = 1))
+tempFC29 = clim_dataFC29 %>% select(c(1,2,32,36,40,44,48))
+tempDB2F = clim_dataDB2F %>% select(c(1,25,29,33,37,41,45,49,53))
+# rename header
+names(tempDB2F) = c("time","ch1_r","ch2_r","ch3_r","ch4_r","ch5_r","ch6_r","ch7_r","ch8_r")
+names(tempFC29) = c("time","base","ch1","ch2","ch3","ch4","ch5")
+#merge files
+temp=merge(tempFC29,tempDB2F)
+# convert string to date
+temp$time=as.POSIXct(temp$time)
 
+# aggregate timeseries
+temp3h = aggregateTS(as.xts(temp), alignBy = "hours",dropna = T,alignPeriod = time_period)
+# clean data
+temp_fin=as_tibble(temp3h) %>% add_column(time = index(temp3h), .before = 1)
+temp_fin=as_tibble(cbind(nms = names(temp_fin), t(temp_fin)))
+names(temp_fin) = temp_fin[1,]
+temp_fin=temp_fin[-1,]
+names(temp_fin)[names(temp_fin) == 'time'] <- 'stationid'
+# read station position data
+ pos=st_read(fn_pos_data)
+ # # extract altitudes for positions
+pos$altitude= exactextractr::exact_extract(DTM,st_buffer(pos,1),"mean")
+# merge positions and values via id
+m=merge(pos,temp_fin)
+# make the var name working for gstat
+n= gsub(x = names(m),pattern = "-",replacement = "")
+n= gsub(x = n,pattern = " ",replacement = "")
+n= gsub(x = n,pattern = ":",replacement = "")
+n= gsub(x = n,pattern = "2023",replacement = "A2023")
+# rename colnames
+names(m)=n
+# grep the varnames
+vars=grep(glob2rx("A2023*"), n, value = TRUE)
+# convert data to terra vector format
+harz_t1<- vect(m)
+
+# calculate voronoi
+harz_t1_voronoi <- terra::voronoi(harz_t1)
+
+# reconvert it to sf
+sf_harz_t1_voronoi=st_as_sf(harz_t1_voronoi)
+
+# map it
+mapview(sf_harz_t1_voronoi[11])
+
+
+
+# # start kriging with gstat 
+# we use the terrain model for prediction
+# convert to sp due to gstat
+m2 = as(m,"Spatial")  
+
+# for all time slots
+for (var in vars){
+# autofit variogramm for kriging 
+  vm.auto = automap::autofitVariogram(formula = as.formula(paste("altitude", "~ 1")),
+                                      input_data = m2)
+ plot(vm.auto)
+
+#   # kriging   
+  print(paste0("kriging ", var))
+  var.pred <- gstat::krige(formula = as.formula(paste0(var, "~altitude")),
+                           locations = m2,
+                           newdata = DTM.spdf,
+                           model = vm.auto$var_model,
+                           debug.level=0,)
+
+   r=rasterFromXYZ(as.data.frame(var.pred)[, c("x", "y", "var1.pred")])
+#   
+# reclassify erratic values
+  reclass_df <- c(-Inf, 0, NA)
+  # reshape the object into a matrix with columns and rows
+  reclass_m <- matrix(reclass_df,
+                      ncol = 3,
+                      byrow = TRUE)
+  r_c <- reclassify(r,reclass_m)
+
+  plot(r_c)
+  # re assign crs
+  #crs(r_c) = crs(paste0("EPSG:32633"))
+  raster::writeRaster(r_c,paste0(var,"v_interpol.tif"),overwrite=TRUE)
+
+}
+
+# # Nearest Neighbor
+# fit_NN <- gstat::gstat( # using package {gstat} 
+#   formula = rain ~ 1,    # The column `NH4` is what we are interested in
+#   data = as(rain, "Spatial"), # using {sf} and converting to {sp}, which is expected
+#   nmax = 10, nmin = 3 # Number of neighboring observations used for the fit
+# )
+# 
+# # Inverse Distance Weighting
+# fit_IDW <- gstat::gstat( # The setup here is quite similar to NN
+#   formula = rain ~ 1,
+#   data = as(rain_sf, "Spatial"),
+#   nmax = 10, nmin = 3,
+#   set = list(idp = 0.5) # inverse distance power
+# )
+# 
+# # Thin Plate Spline Regression
+# mtx = cbind(swissRain$x, swissRain$y ,swissRain$rain)
+# colnames(mtx) <- c("x","y","rain")
+# fit_TPS <- fields::Tps( # using {fields}
+#   x = as.matrix(mtx[, c("x", "y")]), # accepts points but expects them as matrix
+#   Y = rain_df$rain,  # the dependent variable
+#   miles = FALSE     # EPSG 25833 is based in meters
+# )
+# 
+# # Generalized Additive Model
+# fit_GAM <- mgcv::gam( # using {mgcv}
+#   rain ~ s(x, y),      # here come our X/Y/Z data - straightforward enough
+#   data = rain_df      # specify in which object the data is stored
+# )
+# 
+# # Next we use a couple of functions that have a slightly different modus
+# # operandi as they in fact already return interpolated Z values.
+# 
+# # Triangular Irregular Surface
+# fit_TIN <- interp::interp( # using {interp}
+#   x = rain_df$x,           # the function actually accepts coordinate vectors
+#   y = rain_df$y,
+#   z = rain_df$rain,
+#   xo = s_rain_grid$x,     # here we already define the target grid
+#   yo = s_rain_grid$y,
+#   output = "points"
+# ) %>% bind_cols()
 ```
