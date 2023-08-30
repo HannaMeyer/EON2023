@@ -18,13 +18,16 @@ comments: false
   
 </style>
 
-
-
-![](//images/clausiwood.png)
-
 # Welcome  EON Summer School 2023 (28.8-01.09-2023)
 
-# Project suggestions
+::: {layout-ncol=2}
+
+![Polsterberger Hubhaus 2022](/images/clausiwood.png)
+
+![Polsterberger Hubhaus 2023](/images/2023.jpg)
+
+:::
+
 
 # Area of Interest
 
@@ -42,12 +45,10 @@ You can download the geopackage with the AOI here:
 
 https://cloud.hawk.de/index.php/s/yomQwefzLDwyTa6
 
-You can view UAV-images provided by Dr. Hans Fuchs from University of Göttingen here ( *to view the online maps in Firefox browsert you need to accept unsecure connections in the panel left of the url (lock symbol)*):
+You can view UAV-images provided by Dr. Hans Fuchs from University of Göttingen here ( *to view the online maps in Firefox browser you need to accept unsecure connections in the panel left of the url (lock symbol)*):
 
 
 https://wwwuser.gwdg.de/~hfuchs/projekte/polsterberg/
-
-
 
 
 # Datasets & Sensors
@@ -76,7 +77,9 @@ https://wwwuser.gwdg.de/~hfuchs/projekte/polsterberg/
     * ppm 10xx GNSS Sensor
 
 --------
+
 # Programm (Draft)
+
 * Monday (Waldhaus):
     * 12-13:00 Check-in @ "The Cabin" (Waldhaus) Oderbrück
     * 14:00h Welcome & Introduction 
@@ -89,17 +92,17 @@ https://wwwuser.gwdg.de/~hfuchs/projekte/polsterberg/
      * 16:00-18:00 **Block 1 Collection of reference data** in the context of forest monitoring (Paul Magdon, HAWK)
 
 * Wednesday (Waldhaus & Excursion):
-     * 9:00:10:00 **Block 2 Measuring microclimate with mobile climate station** (Chris Reudenbach, Uni Marburg) 
-     * 10:30-12:00 **Block 3 Modelling microclimate** (Chris Reudenbach, Uni Marburg) 
-     * 12:00 Lunch
-     * 13:00 - **Joint data collections campaign** @ Polstertalerhubhaus
+     * 9:00-12:00 **Exkursion to National Park Harz** and meeting with park researchers 
+     * 13:00 Lunch
+     * 14:00 - **Joint data collections campaign** @ Polstertalerhubhaus
 
 * Thursday (Waldhaus):
-    * 9:00-12:00 **Exkursion to National Park Harz** and meeting with park researchers 
-    * 12:00-13:00 Lunch
-    * 13:00-15:00 **Block 5 "Machine learning and validation"** (Hanna Meyer, Uni Münster)
+    * 9:00:10:00 **Block 2 Measuring microclimate with mobile climate station** (Chris Reudenbach, Uni Marburg) 
+    * 10:30-12:00 **Block 3 Modelling microclimate** (Chris Reudenbach, Uni Marburg) 
+   * 12:00-13:00 Lunch
+   * 13:00-15:00 **Block 4 "Machine learning and validation"** (Hanna Meyer, Uni Münster)
     * 15:00- Group work
-    * evening **Block 6 human sensing of the environment** (a.k.a walk & talk)
+    * evening **Block 5 human sensing of the environment** (a.k.a walk & talk)
         
  * Friday (Waldhaus):
     * 09:00-11:00 Group work
