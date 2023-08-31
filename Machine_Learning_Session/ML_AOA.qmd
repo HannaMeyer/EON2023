@@ -21,8 +21,6 @@ To do this we will look at two case studies located in the MarburgOpenForest in 
 Based on "default" models, we will further discuss the relevance of different validation strategies and the area of applicability.
 
 
-
-
 ## How to start
 
 For this tutorial we need the raster package for processing of the satellite data (note: needs to be replaced by terra soon) as well as the caret package as a wrapper for machine learning (here: randomForest) algorithms. Sf is used for handling of the training data available as vector data (polygons). Mapview is used for spatial visualization of the data. CAST will be used to account for spatial dependencies during model validation as well as for the estimation of the AOA.
