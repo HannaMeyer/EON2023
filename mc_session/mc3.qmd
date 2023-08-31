@@ -45,11 +45,16 @@ Machine learning algorithms like random forest have become very popular for spat
 [Voronoi polygons](https://en.wikipedia.org/wiki/Voronoi_diagram)  (aka Thiessen polygons) are an elementary method for geometrically determining *proximity* or *neighborhoods*. Voronoi polygons (see figure below) divide an area into regions that are closest to a given point in a set of irregularly distributed points. In two dimensions, a Voronoi polygon encompasses an area around a point, such that every spatial point within the Voronoi polygon is closer to this point than to any other point in the set. Such constructs can also be formed in higher dimensions, giving rise to Voronoi polyhedra.
 
 ```{=html}
-<iframe width="780" height="500" src="https://geomoer.github.io/geoAI//assets/images/unit01/suisse1.html" title="V"></Voronoiframe>
+<iframe width="780" height="500" src="https://geomoer.github.io/geoAI//assets/images/unit01/suisse1.html" title="VVoronoi"></frame>
+```
+
+```{=html}
+<iframe width="780" height="500" src="https://geomoer.github.io/geoAI//assets/images/unit01/suisse6.html" title="Interpol"></iframe>
 ```
 <figure>
   <figcaption>The blue dots are a typical example of irregularly distributed points in space -- in this case, rain gauges in Switzerland. The overlaid polygons are the corresponding Voronoi segments that define the corresponding closest geometrical areas (gisma 2021)" </figcaption>
 </figure>
+
 
 Since Voronoi polygons correspond to an organizational principle frequently observed in both nature (e.g. plant cells) and in the spatial sciences (e.g. [central places](https://en.wikipedia.org/wiki/Central_place_theory) , according to Christaller), there are manifold possible applications. Two things must be assumed, however: First, that nothing else is known about the space between the sampled locations and, second, that the boundary line between two samples is **incomplete idea**.
 
@@ -63,9 +68,11 @@ But what if we know more about the spatial relationships of the features? Let's 
 ### Continously filling the gaps by interpolation
 To get started, take a look at the following figure, which shows six different interpolation methods to derive the spatial distribution of precipitation in Switzerland (in addition to the overlaid Voronoi tessellation). 
 
+
 ```{=html}
-<iframe width="780" height="500" src="https://geomoer.github.io/geoAI//assets/images/unit01/suisse6.html" title="Voronoi"></iframe>
+<iframe width="780" height="500" src="https://geomoer.github.io/geoAI//assets/images/unit01/suisse6.html" title="Interpol"></iframe>
 ``` 
+
 <figure>
   <figcaption>The blue dots are a typical example of irregularly distributed points in space -- in this case, rain gauges in Switzerland. The size of each dot corresponds to the amount of precipitation in mm. The overlaid polygons are the corresponding Voronoi segments that define the corresponding closest geometrical areas (gisma 2021)" 
 top left: Nearest neighbor interpolation based on 3-5 nearest neighbors, top right: Inverse Distance weighting (IDW) interpolation method
