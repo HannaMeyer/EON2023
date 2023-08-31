@@ -23,9 +23,7 @@ website:
       - icon: question-square-fill
         text: FAQ
         href: base/faq.qmd
-      - icon: file-slides-fill
-        text: Slides
-        href: slides/slidelist.qmd
+
 
   sidebar:
     # logo: /images/logo.jpg
