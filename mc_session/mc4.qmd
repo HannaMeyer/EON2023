@@ -1,0 +1,25 @@
+---
+title: "Data Sources"
+image: ../images/mc4.png
+
+about:
+  id: image-heading
+  template: solana
+  image-shape: round
+  image-width: 10em
+  links:
+    - icon: shop-window
+      text: Station inside the dead Fir plot (Ecowitt Login required)
+      href: https://www.ecowitt.net/home/index?id=149300
+    - icon: shop-window
+      text: Station inside the clear cut (Ecowitt Login required)
+      href: https://www.ecowitt.net/home/index?id=20166
+    - icon: shop-window
+      text: Position Data of the climate stations
+      href: https://github.com/HannaMeyer/EON2023/blob/main/mc_session/stations_prelim.zip
+
+---
+::: {#image-heading}
+Data logger and measurement data
+:::
+
