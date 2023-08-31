@@ -101,6 +101,7 @@ https://wwwuser.gwdg.de/~hfuchs/projekte/polsterberg/
    * 12:00-12:30 Lunch
     * 12:30-14:00 human sensing of the environment (a.k.a walk & talk)
    * 15:00-17:30 **Block 4 "Machine learning and validation"** (Hanna Meyer, Uni Münster)
+
         
  * Friday (Waldhaus):
     * 09:00-11:00 Group work
