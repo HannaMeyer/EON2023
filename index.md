@@ -96,11 +96,11 @@ https://wwwuser.gwdg.de/~hfuchs/projekte/polsterberg/
 
 * Thursday (Waldhaus):
     * 9:00:10:00 **Block 2 Measuring microclimate with mobile climate station** (Chris Reudenbach, Uni Marburg) 
-    * 10:30-12:00 **Block 3 Modelling microclimate** (Chris Reudenbach, Uni Marburg) 
+    * 10:00-11:00 **Block 3 Modelling microclimate** (Chris Reudenbach, Uni Marburg)
+    * 11:00-12:00 Group work
    * 12:00-13:00 Lunch
-   * 13:00-15:00 **Block 4 "Machine learning and validation"** (Hanna Meyer, Uni Münster)
-    * 15:00- Group work
-    * evening **Block 5 human sensing of the environment** (a.k.a walk & talk)
+   * 13:00-14:30 human sensing of the environment** (a.k.a walk & talk)
+   * 15:00-18:00 **Block 4 "Machine learning and validation"** (Hanna Meyer, Uni Münster)
         
  * Friday (Waldhaus):
     * 09:00-11:00 Group work
