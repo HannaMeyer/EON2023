@@ -115,4 +115,4 @@ For safe operation, the following points must be taken into account when setting
 1. The box is secured and tight.
 
 ## Risk Assessment
-Here you find the preliminary [risk assesment]({{site.baseurl}}../imgages/battery_box/GFB-12V Anlagen_Natur40.pdf) for the installation and operation of 12 V solar power based energy supply units and measuring sensor systems.
+Here you find the preliminary [risk assesment](../images/battery_box/GFB-12V Anlagen_Natur40.pdf) for the installation and operation of 12 V solar power based energy supply units and measuring sensor systems.
