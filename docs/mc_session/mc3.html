@@ -93,19 +93,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="../site_libs/jquery-1.12.4/jquery.min.js"></script>
+<link href="../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="../site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="../site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="../site_libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<script src="../site_libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="../site_libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+<script src="../site_libs/raster(interpNN)_a427e0-1/data_stars_rasterinterpNN4c3f78.txt"></script>
+<script src="../site_libs/joda-0.0.1/joda.js"></script>
+<script src="../site_libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="../site_libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="../site_libs/HomeButton-0.0.1/home-button.css" rel="stylesheet">
+<script src="../site_libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="../site_libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="../site_libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet">
+<link href="../site_libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet">
+<script src="../site_libs/raster(interpIDW)_854b36-1/data_stars_rasterinterpIDW4301c9.txt"></script>
 
 
 <link rel="stylesheet" href="../css/styles.css">
 <meta property="og:title" content="EON Summer School 2023 - Spatial Interpolation">
-<meta property="og:image" content="https://hannameyer.github.io/EON2023/images/battery_box/top_box.jpg">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://hannameyer.github.io/EON2023/images/mc3.png">
 <meta property="og:site-name" content="EON Summer School 2023">
+<meta property="og:image:height" content="592">
+<meta property="og:image:width" content="523">
 <meta name="twitter:title" content="EON Summer School 2023 - Spatial Interpolation">
-<meta name="twitter:image" content="https://hannameyer.github.io/EON2023/images/battery_box/top_box.jpg">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://hannameyer.github.io/EON2023/images/mc3.png">
 <meta name="twitter:creator" content="@yxz">
+<meta name="twitter:image-height" content="592">
+<meta name="twitter:image-width" content="523">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -147,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mc_session/mc1.html">Microclimate</a></li><li class="breadcrumb-item"><a href="../mc_session/mc3.html">Spatial Interpolation</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mc_session/mc1.html">Microclimate &amp; Interpolation</a></li><li class="breadcrumb-item"><a href="../mc_session/mc3.html">Spatial Interpolation</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -171,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome</span></a>
+ <span class="menu-text">Welcome EON Summer School 2023 (28.8-01.09-2023)</span></a>
   </div>
 </li>
       </ul>
@@ -180,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
- <span class="menu-text">Machine Learning</span></a>
+ <span class="menu-text">Training Data</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -188,8 +215,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Machine_Learning_Session/ML_AOA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Machine learning for remote sensing applications</span></a>
+  <a href="../paul_tutorial/01_TrainingDataCollection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collection of training data for remote sensing model building</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../paul_tutorial/02_ValidationDataCollection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collection of validation data in the context of remote sensing based forest monitoring</span></a>
   </div>
 </li>
       </ul>
@@ -198,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Microclimate</span></a>
+ <span class="menu-text">Microclimate &amp; Interpolation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -218,36 +251,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mc_session/mc3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Spatial Interpolation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="https://www.komoot.de/tour/1283135618?ref=wtd&amp;share_token=a3DGxlqnl4tgjndhw9ThgHQllieM6BTzD2BSbyXKRUlAWNn3ZB" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Stations</span></a>
+ <span class="menu-text">Station Map</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="https://www.ecowitt.net/home/index?id=149300" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Forest</span></a>
+ <span class="menu-text">ClearingData (Ecowitt Login required)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="https://www.ecowitt.net/home/index?id=20166" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Clearing</span></a>
+ <span class="menu-text">Forest Data (Ecowitt Login required)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mc_session/mc3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Spatial Interpolation</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Machine_Learning_Session/ML_AOA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine learning for remote sensing applications</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#distance-and-data-representation" id="toc-distance-and-data-representation" class="nav-link active" data-scroll-target="#distance-and-data-representation">Distance and data representation</a>
+  <ul class="collapse">
+  <li><a href="#neighborhood" id="toc-neighborhood" class="nav-link" data-scroll-target="#neighborhood">Neighborhood</a></li>
+  <li><a href="#distance" id="toc-distance" class="nav-link" data-scroll-target="#distance">Distance</a></li>
+  </ul></li>
+  <li><a href="#filling-spatial-gaps" id="toc-filling-spatial-gaps" class="nav-link" data-scroll-target="#filling-spatial-gaps">Filling spatial gaps</a></li>
+  <li><a href="#proximity-concepts" id="toc-proximity-concepts" class="nav-link" data-scroll-target="#proximity-concepts">Proximity concepts</a>
+  <ul class="collapse">
+  <li><a href="#voronoi-polygons-dividing-space-geometrically" id="toc-voronoi-polygons-dividing-space-geometrically" class="nav-link" data-scroll-target="#voronoi-polygons-dividing-space-geometrically">Voronoi polygons – dividing space geometrically</a></li>
+  <li><a href="#spatial-interpolation-of-data" id="toc-spatial-interpolation-of-data" class="nav-link" data-scroll-target="#spatial-interpolation-of-data">Spatial interpolation of data</a></li>
+  <li><a href="#continously-filling-the-gaps-by-interpolation" id="toc-continously-filling-the-gaps-by-interpolation" class="nav-link" data-scroll-target="#continously-filling-the-gaps-by-interpolation">Continously filling the gaps by interpolation</a></li>
+  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine learning</a></li>
+  <li><a href="#additional-references" id="toc-additional-references" class="nav-link" data-scroll-target="#additional-references">Additional references</a></li>
+  </ul></li>
+  <li><a href="#hands-on-our-data" id="toc-hands-on-our-data" class="nav-link" data-scroll-target="#hands-on-our-data">Hands on our data</a>
+  <ul class="collapse">
+  <li><a href="#setup-the-environment" id="toc-setup-the-environment" class="nav-link" data-scroll-target="#setup-the-environment">Setup the environment</a></li>
+  <li><a href="#cleaning-data" id="toc-cleaning-data" class="nav-link" data-scroll-target="#cleaning-data">Cleaning data</a></li>
+  <li><a href="#preparing-and-converting-spatial-basis-data-sets" id="toc-preparing-and-converting-spatial-basis-data-sets" class="nav-link" data-scroll-target="#preparing-and-converting-spatial-basis-data-sets">Preparing and converting spatial basis data sets</a></li>
+  </ul></li>
+  <li><a href="#basic-interpolations" id="toc-basic-interpolations" class="nav-link" data-scroll-target="#basic-interpolations">Basic Interpolations</a>
+  <ul class="collapse">
+  <li><a href="#kriging-with-the-relation-to-the-dgm" id="toc-kriging-with-the-relation-to-the-dgm" class="nav-link" data-scroll-target="#kriging-with-the-relation-to-the-dgm">Kriging with the relation to the DGM</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/HannaMeyer/EON2023/edit/main/mc_session/mc3.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/HannaMeyer/EON2023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
@@ -264,145 +347,501 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </header> 
       <div class="about-contents"><div id="image-heading">
-<p>test</p>
+<p>The use of quantitative methods, especially statistical methods, is of considerable importance for describing and explaining spatial patterns (e.g.&nbsp;landscape ecology). The central concept on which these methods are based is that of proximity, or location in relation to each other.</p>
 </div></div>
     </div>
-    <img src="../images/../images/battery_box/top_box.jpg" class="about-image
+    <img src="../images/mc3.png" class="about-image
   round " style="height: 10em; width: 10em;">
   </div>
 </div>
 
-<div class="cell" data-run="false">
+<section id="distance-and-data-representation" class="level2">
+<h2 data-anchor-id="distance-and-data-representation">Distance and data representation</h2>
+<p>Let’s take a closer look at proximity, which is mentioned frequently. What exactly is it? How can proximity/neighborliness be expressed in such a way that the space becomes meaningful?</p>
+<p>In general, spatial relationships are described in terms of neighborhoods (positional) and distances (metric). In spatial analysis or prediction, however, it is important to be able to name the spatial <strong>influence</strong>, i.e.&nbsp;the evaluation or weighting of this relationship, either qualitatively or quantitatively. Tobler did this for a specific objective by stating that “near” is more important than “far”. But what about in other cases? The challenge is that spatial influence can only be measured directly in exceptional cases. There are many ways to estimate it, however.</p>
+<section id="neighborhood" class="level3">
+<h3 data-anchor-id="neighborhood">Neighborhood</h3>
+<p>Neighborhood is perhaps the most important concept. Higher dimensional geo-objects can be considered neighboring if they <em>touch</em> each other, e.g.&nbsp;neighboring countries. For zero-dimensional objects (points), the most common approach is to use distance in combination with a number of points to determine neighborhood.</p>
+</section>
+<section id="distance" class="level3">
+<h3 data-anchor-id="distance">Distance</h3>
+<p>Proximity or neighborhood analyses are often concerned with areas of influence or catchment areas, i.e.&nbsp;spatial patterns of effects or processes.</p>
+<p>This section discusses some methods for calculating distances between spatial objects. Because of the different ways of discretizing space, we must make the – already familiar – distinction between vector and raster data models.</p>
+<p>Initially, it is often useful to work without spatially restrictive conditions in a first analysis, e.g.&nbsp;when this information is missing. The term “proximity” inherently implies a certain imprecision. Qualitative terms that can be used for this are: “near”, “far” or “in the neighborhood of”. Representation and data-driven analysis require these terms to be objectified and operationalized. So, this metric must be based on a distance concept, e.g.&nbsp;Euclidean distance or travel times. In a second interpretative step, we must decide which units define this type of proximity. In terms of the objective of a question, there are only suitable and less-suitable measures; there is no correct or incorrect. Therefore, it is critical to define a meaningful neighborhood relationship for the objects under investigation.</p>
+</section>
+</section>
+<section id="filling-spatial-gaps" class="level2">
+<h2 data-anchor-id="filling-spatial-gaps">Filling spatial gaps</h2>
+<p>Now that we have learned the basic concepts of distance, neighborhood and filling spatial gaps, let’s take a look at interpolating or predicting values in space.</p>
+<p>For many decades, deterministic interpolation techniques (<a href="https://en.wikipedia.org/wiki/Inverse_distance_weighting">inverse distance weighting</a>, <a href="https://en.wikipedia.org/wiki/Nearest_neighbor_search">nearest neighbor</a>, <a href="https://en.wikipedia.org/wiki/Kriging">kriging</a>) have been the most popular spatial interpolation techniques. External drift kriging and regression kriging, in particular, are fundamental techniques that use <a href="https://en.wikipedia.org/wiki/Spatial_analysis#Spatial_auto-correlation">spatial autocorrelation</a> and covariate information, i.e.&nbsp;sophisticated regression statistics.</p>
+<p>Machine learning algorithms like random forest have become very popular for spatial environmental prediction. One major reason for this is that they are can take into account non-linear and complex relationships, i.e.&nbsp;compensate for certain disadvantages that are present in the usual regression methods.</p>
+</section>
+<section id="proximity-concepts" class="level2">
+<h2 data-anchor-id="proximity-concepts">Proximity concepts</h2>
+<section id="voronoi-polygons-dividing-space-geometrically" class="level3">
+<h3 data-anchor-id="voronoi-polygons-dividing-space-geometrically">Voronoi polygons – dividing space geometrically</h3>
+<p><a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi polygons</a> (aka Thiessen polygons) are an elementary method for geometrically determining <em>proximity</em> or <em>neighborhoods</em>. Voronoi polygons (see figure below) divide an area into regions that are closest to a given point in a set of irregularly distributed points. In two dimensions, a Voronoi polygon encompasses an area around a point, such that every spatial point within the Voronoi polygon is closer to this point than to any other point in the set. Such constructs can also be formed in higher dimensions, giving rise to Voronoi polyhedra.</p>
+<iframe width="780" height="500" src="https://geomoer.github.io/geoAI//assets/images/unit01/suisse1.html" title="V"></Voronoiframe>
+<figure>
+<figcaption>
+The blue dots are a typical example of irregularly distributed points in space – in this case, rain gauges in Switzerland. The overlaid polygons are the corresponding Voronoi segments that define the corresponding closest geometrical areas (gisma 2021)”
+</figcaption>
+</figure>
+<p>Since Voronoi polygons correspond to an organizational principle frequently observed in both nature (e.g. plant cells) and in the spatial sciences (e.g. <a href="https://en.wikipedia.org/wiki/Central_place_theory">central places</a> , according to Christaller), there are manifold possible applications. Two things must be assumed, however: First, that nothing else is known about the space between the sampled locations and, second, that the boundary line between two samples is <strong>incomplete idea</strong>.</p>
+<p>Voronoi polygons can also be used to delineate catchment areas of shops, service facilities or wells, like in the example of the Soho cholera outbreak. Please note that within a polygon, one of the spatial features is isomorphic, i.e. the spatial features are identical.</p>
+<p>But what if we know more about the spatial relationships of the features? Let’s have a look at some crucial concepts.</p>
+</section>
+<section id="spatial-interpolation-of-data" class="level3">
+<h3>Spatial interpolation of data</h3>
+<p><em>Spatially interpolating</em> data points provides us with a modeled quasi-continuous estimation of features under the corresponding assumptions. But what is spatial interpolation? Essentially, this means using known values to calculate neighboring values that are unknown. Most of these techniques are among the most complex methods of spatial analysis, so we will deliberately limit ourselves here to a basic overview of the methods. Some of the best-known and common interpolation methods found in spatial sciences are <em>nearest neighbor</em> <em>inverse distance</em>, <em>spline interpolations</em>, <em>kriging</em>, and <em>regression methods</em>.</p>
+</section>
+<section id="continously-filling-the-gaps-by-interpolation" class="level3">
+<h3>Continously filling the gaps by interpolation</h3>
+<p>To get started, take a look at the following figure, which shows six different interpolation methods to derive the spatial distribution of precipitation in Switzerland (in addition to the overlaid Voronoi tessellation).</p>
+<iframe width="780" height="500" src="https://geomoer.github.io/geoAI//assets/images/unit01/suisse6.html" title="Voronoi"></iframe>
+<figure class="figure">
+<figcaption class="figure-caption">
+The blue dots are a typical example of irregularly distributed points in space – in this case, rain gauges in Switzerland. The size of each dot corresponds to the amount of precipitation in mm. The overlaid polygons are the corresponding Voronoi segments that define the corresponding closest geometrical areas (gisma 2021)” top left: Nearest neighbor interpolation based on 3-5 nearest neighbors, top right: Inverse Distance weighting (IDW) interpolation method middle left: AutoKriging with no additional parameters, middle right: Thin plate spline regression interpolation method bottom left: Triangular irregular net (TIN) surface interpolation, bottom right: additive model (GAM) interpolation
+</figcaption>
+</figure>
+<p>In the example of precipitation in Switzerland, the positions of the weather stations are fixed and cannot be freely chosen.</p>
+<p>When choosing an appropriate interpolation method, we need to pay attention to several properties of the samples (distribution and properties of the measurement points):</p>
+<ul>
+<li><strong>Representativeness of measurement points:</strong> The sample should represent the phenomenon being analyzed in all of its manifestations.</li>
+<li><strong>Homogeneity of measurement points:</strong> The spatial interdependence of the data is a very important basic requirement for further meaningful analysis.</li>
+<li><strong>Spatial distribution of measurement points:</strong> The spatial distribution is of great importance. It can be completely random, regular or clustered.</li>
+<li><strong>Number of measurement points:</strong> The number of measurement points depends on the phenomenon and the area. In most cases, the choice of sample size is subject to practical limitations.</li>
+</ul>
+<p>What makes things even more complex is that these four factors – representativeness, homogeneity, spatial distribution and size – are all interrelated. For example, a sample size of 5 measuring stations for estimating precipitation for all of Switzerland is hardly meaningful and therefore not representative. Equally unrepresentative would be selecting every measuring station in German-speaking Switzerland to estimate precipitation for the entire country. In this case, the number alone might be sufficient, but the spatial distribution would not be. If we select every station at an altitude below 750 m asl, the sample could be correct in terms of both size and spatial distribution, but the phenomenon is not homogeneously represented in the sample. An estimate based on this sample would be clearly distorted, especially in areas above 750 m asl. In practice, virtually every natural spatially-continuous phenomenon is governed by stochastic fluctuations, so, mathematically speaking, it can only be described in approximate terms.</p>
+</section>
+<section id="machine-learning" class="level3">
+<h3 data-anchor-id="machine-learning">Machine learning</h3>
+<p>Machine learning (ML) methods such as random forest can also produce spatial and temporal predictions (i.e.&nbsp;produce maps from point observations). These methods are particularly robust because they take spatial autocorrelation into account, which can improve predictions or interpolations by adding geographic distances. This ultimately leads to better maps with much more complex relationships and dependencies.</p>
+<p>In the simplest case, the results are comparable to the well-known model-based geostatistics. The advantage of ML methods over model-based geostatistics, however, is that they make fewer assumptions, can take non-linearities into account and are easier to automate.</p>
+<img src="https://geomoer.github.io/geoAI/assets/images/unit01/ML_interpol.png" class="img-fluid">
+<figure class="figure">
+<figcaption class="figure-caption">
+The original dataset (top left) is a terrain model reduced to 8 meters with 48384 single pixels. For interpolation, 1448 points were randomly drawn and interpolated with conventional kriging (top right), support vector machines (SVM) (middle left), neural networks (middle right), and two variants of random forest (bottom row). In each method, only the distance of the drawn points is used as a dependency.<br>
+
+</figcaption>
+</figure>
+<p>Each interpolation method was applied using the “default” settings. Tuning could possibly lead to significant changes in all of them. Fascinatingly, the error measures correlate to the visual results: Kriging and the neural network show the best performance, followed by the random forest models and the support-vector machine.</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:left;">
+total_error
+</th>
+<th style="text-align:left;">
+mean_error
+</th>
+<th style="text-align:left;">
+sd_error
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Kriging
+</td>
+<td style="text-align:left;">
+15797773.0
+</td>
+<td style="text-align:left;">
+54.2
+</td>
+<td style="text-align:left;">
+67.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Neural Network
+</td>
+<td style="text-align:left;">
+19772241.0
+</td>
+<td style="text-align:left;">
+67.8
+</td>
+<td style="text-align:left;">
+80.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Random Forest
+</td>
+<td style="text-align:left;">
+20540628.1
+</td>
+<td style="text-align:left;">
+70.4
+</td>
+<td style="text-align:left;">
+82.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Normalized Random Forest
+</td>
+<td style="text-align:left;">
+20597969.8
+</td>
+<td style="text-align:left;">
+70.6
+</td>
+<td style="text-align:left;">
+82.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Support Vector Machine
+</td>
+<td style="text-align:left;">
+21152987.7
+</td>
+<td style="text-align:left;">
+72.5
+</td>
+<td style="text-align:left;">
+68.3
+</td>
+</tr>
+</tbody>
+
+</table>
+</section>
+<section id="additional-references" class="level3">
+<h3 data-anchor-id="additional-references">Additional references</h3>
+<p>Get the Most Out of AI, Machine Learning, and Deep Learning <a href="https://www.youtube.com/watch?v=KiKjforteXs">Part 1</a> (10:52) and <a href="https://www.youtube.com/watch?v=Ys33AhNDwC4">Part 2</a> (13:18)</p>
+<p><a href="https://youtu.be/reY50t2hbuM">Why You Should NOT Learn Machine Learning!</a> (6:17)</p>
+<p><a href="https://youtu.be/aKq50YM8a8w">GeoAI: Machine Learning meets ArcGIS</a> (8:50)</p>
+</section>
+</section>
+<section id="hands-on-our-data" class="level2">
+<h2 data-anchor-id="hands-on-our-data">Hands on our data</h2>
+<section id="setup-the-environment" class="level3">
+<h3 data-anchor-id="setup-the-environment">Setup the environment</h3>
+<p>Please download the data from the repository or take the USB-stick</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: FR_soilmoist.R</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Type: control script </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: Chris Reudenbach, creuden@gmail.com</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Description:  calculates the soil moisture from Lacanau point data</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Copyright:GPL (&gt;= 3) </span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Date: 2022-11-10 </span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># V-2022-11-12; </span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - project setup</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># geoAI course basic setup</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Type: script</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: geoAI_setup.R</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: Chris Reudenbach, creuden@gmail.com</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Description:  create/read project folder structure and returns pathes as list</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#               load all necessary packages </span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#               sources all functions in a defined function folder</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Dependencies:   </span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: list containing the folder strings as shortcuts</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Copyright: Chris Reudenbach, thomas Nauss 2019-2021, GPL (&gt;= 3)</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># git clone https://github.com/gisma-courses/geoAI-scripts.git</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Type: control script </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: Chris Reudenbach, creuden@gmail.com</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description:  interpolates the air temp</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Copyright:GPL (&gt;= 3) </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Date: 2023-08-28 </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># V-2023-08-28 ; </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - project s</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># basic packages</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mapview"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"raster"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"terra"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lwgeom"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"highfrequency"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rprojroot"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"xts"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sp"</span>)</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># basic packages</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mapview"</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tmap"</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tmaptools"</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"raster"</span>)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"terra"</span>)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lidR"</span>)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"future"</span>)</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lwgeom"</span>)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tmap"</span>)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mapview"</span>)</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rprojroot)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>root_folder <span class="ot">=</span> <span class="fu">find_rstudio_root_file</span>()</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">#root_folder = getwd()</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>ndvi.col <span class="ot">=</span> <span class="cf">function</span>(n) {</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rev</span>(colorspace<span class="sc">::</span><span class="fu">sequential_hcl</span>(n, <span class="st">"Green-Yellow"</span>))</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>ano.col <span class="ot">=</span> colorspace<span class="sc">::</span><span class="fu">diverging_hcl</span>(<span class="dv">7</span>, <span class="at">palette =</span> <span class="st">"Red-Green"</span>,  <span class="at">register =</span> <span class="st">"rg"</span>)</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co"># # suppres gdal warnings</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co"># rgdal::set_thin_PROJ6_warnings(TRUE)</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co"># # workaround subfolder</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co"># loc_name = "harz"</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co"># # harz</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co"># epsg=25833</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co"># attributename = c("Moisture_1_17Nov","Moisture_2_17Nov","Moisture_1_19Nov","Moisture_2_19Nov")</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co"># varname = c("soilmoist2022_08_17","soilmoist2022_08_19")</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co"># fnDTM = "DTM_v3.vrt"</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="co"># fnsm_data = "lacanau_moisture_measurements.csv"</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co"># fnpos_data= "ltrees.gpkg"</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="co"># # read DTM</span></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="co"># DTM = terra::rast(fnDTM)</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co"># # cast to SpatialPixelsDataFrame</span></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="co"># DTM.spdf &lt;- as(raster(DTM),</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="co">#                        'SpatialPixelsDataFrame')</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="co"># colnames(DTM.spdf@data) &lt;- "altitude"</span></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="co"># # read moist data </span></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="co"># sm=read.csv2(fnsm_data,sep = ",")</span></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="co"># # read tree data</span></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="co"># pos=st_read(fnpos_data)</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="co"># # merge</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co"># sm$Point = paste0("TREE",str_split_fixed(sm$TargetID, "_", 3)[,3])</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="co"># m=merge(pos,sm)</span></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="co"># # extract altitudes for positions</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="co"># em= exactextractr::exact_extract(DTM,st_buffer(m,1),"mean")</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="co"># m$altitude=em</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="co"># # start kriging </span></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="co"># for (i in 1:length(varname) ){</span></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="co">#   z=i*2</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="co">#   # mean</span></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="co">#   m$var = (as.numeric(m[[attributename[z-1]]]) + as.numeric(m[[attributename[z]]]))/2</span></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="co">#   # to sp</span></span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="co">#   m2 = as(m,"Spatial")    </span></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="co">#   tm2 = spTransform(m2,</span></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="co">#                     crs("+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="co">#   # autofit variogramm for kriging </span></span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="co">#   vm.auto = automap::autofitVariogram(formula = as.formula(paste("var", "~ 1")),</span></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="co">#                                       input_data = tm2)</span></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="co">#   plot(vm.auto)</span></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a><span class="co">#   # kriging   </span></span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="co">#   print(paste0("kriging ", varname[i]))</span></span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="co">#   var.pred &lt;- gstat::krige(formula = as.formula(paste("var", "~ altitude")),</span></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="co">#                            locations = tm2,</span></span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="co">#                            newdata = DTM.spdf,</span></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="co">#                            model = vm.auto$var_model,</span></span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="co">#                            debug.level=0,)</span></span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="co">#   r=rasterFromXYZ(as.data.frame(var.pred)[, c("x", "y", "var1.pred")])</span></span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="co">#   # reclassify erratic values </span></span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="co">#   reclass_df &lt;- c(-Inf, 0, NA)</span></span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="co">#   # reshape the object into a matrix with columns and rows</span></span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a><span class="co">#   reclass_m &lt;- matrix(reclass_df,</span></span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="co">#                       ncol = 3,</span></span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a><span class="co">#                       byrow = TRUE)</span></span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="co">#   r_c &lt;- reclassify(r,reclass_m)</span></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a><span class="co">#   plot(r_c)</span></span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="co">#   # re assign crs</span></span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="co">#   crs(r_c) = crs(paste0("EPSG:",epsg))</span></span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="co">#   raster::writeRaster(r_c,paste0("data/gis/France_Lacanau_PP_Gis/data_lev0/",varname[i],".tif"),overwrite=TRUE)</span></span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># get the current folder as working dircetory</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>root_folder <span class="ot">=</span> <span class="fu">find_rstudio_root_file</span>()</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># define time period to aggregate temp data</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>time_period <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># names of data files</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>fnDTM <span class="ot">=</span> <span class="st">"copernicus_DEM.tif"</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>fn_dataFC29 <span class="ot">=</span> <span class="st">"all_GW1000A-WIFIFC29(202308270000-202308292319).xlsx"</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>fn_dataDB2F <span class="ot">=</span><span class="st">"all_GW1000A-WIFIDB2F(202308270000-202308292219).xlsx"</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>fn_pos_data<span class="ot">=</span> <span class="st">"stations_prelim.shp"</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>fn_area <span class="ot">=</span><span class="st">"plot.shp"</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># # read DTM</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>DTM <span class="ot">=</span> terra<span class="sc">::</span><span class="fu">rast</span>(fnDTM)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>DTM<span class="ot">=</span><span class="fu">disagg</span>(DTM, <span class="at">fact=</span><span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># # cast to SpatialPixelsDataFrame</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>DTM.spdf <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">raster</span>(DTM),<span class="st">'SpatialPixelsDataFrame'</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DTM.spdf<span class="sc">@</span>data) <span class="ot">&lt;-</span> <span class="st">"altitude"</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">=</span> raster<span class="sc">::</span><span class="fu">crs</span>(<span class="st">"+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs "</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(DTM.spdf)<span class="ot">=</span>crs</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># read station position data</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a> pos<span class="ot">=</span><span class="fu">st_read</span>(fn_pos_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `stations_prelim' from data source 
+  `/home/creu/edu/summerschool2023/EON2023/mc_session/stations_prelim.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 14 features and 1 field
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 183055.8 ymin: 5748366 xmax: 183170.3 ymax: 5748499
+Projected CRS: WGS 84 / UTM zone 33N</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># read station position data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>area<span class="ot">=</span><span class="fu">st_read</span>(fn_area)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `plot' from data source 
+  `/home/creu/edu/summerschool2023/EON2023/mc_session/plot.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 1 feature and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 10.40154 ymin: 51.79506 xmax: 10.40658 ymax: 51.79803
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>area<span class="ot">=</span><span class="fu">st_transform</span>(area,crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cleaning-data" class="level3">
+<h3 data-anchor-id="cleaning-data">Cleaning data</h3>
+<p>We need to do an ugly cleaning job. This is basically the most cumbersome part of dealing with data analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # read tempperature data </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>clim_dataFC29 <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">read_excel</span>(fn_dataFC29, <span class="at">skip =</span> <span class="dv">1</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>clim_dataDB2F <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">read_excel</span>(fn_dataDB2F, <span class="at">skip =</span> <span class="dv">1</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tempFC29 <span class="ot">=</span> clim_dataFC29 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">32</span>,<span class="dv">36</span>,<span class="dv">40</span>,<span class="dv">44</span>,<span class="dv">48</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>tempDB2F <span class="ot">=</span> clim_dataDB2F <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">25</span>,<span class="dv">29</span>,<span class="dv">33</span>,<span class="dv">37</span>,<span class="dv">41</span>,<span class="dv">45</span>,<span class="dv">49</span>,<span class="dv">53</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># rename header</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tempDB2F) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"time"</span>,<span class="st">"ch1_r"</span>,<span class="st">"ch2_r"</span>,<span class="st">"ch3_r"</span>,<span class="st">"ch4_r"</span>,<span class="st">"ch5_r"</span>,<span class="st">"ch6_r"</span>,<span class="st">"ch7_r"</span>,<span class="st">"ch8_r"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tempFC29) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"time"</span>,<span class="st">"base"</span>,<span class="st">"ch1"</span>,<span class="st">"ch2"</span>,<span class="st">"ch3"</span>,<span class="st">"ch4"</span>,<span class="st">"ch5"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#merge files</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>temp<span class="ot">=</span><span class="fu">merge</span>(tempFC29,tempDB2F)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># convert string to date</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>time<span class="ot">=</span><span class="fu">as.POSIXct</span>(temp<span class="sc">$</span>time)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># aggregate timeseries</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>temp3h <span class="ot">=</span> <span class="fu">aggregateTS</span>(<span class="fu">as.xts</span>(temp), <span class="at">alignBy =</span> <span class="st">"hours"</span>,<span class="at">dropna =</span> T,<span class="at">alignPeriod =</span> time_period)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># clean data</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>temp_fin<span class="ot">=</span><span class="fu">as_tibble</span>(temp3h) <span class="sc">%&gt;%</span> <span class="fu">add_column</span>(<span class="at">time =</span> <span class="fu">index</span>(temp3h), <span class="at">.before =</span> <span class="dv">1</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>temp_fin<span class="ot">=</span><span class="fu">as_tibble</span>(<span class="fu">cbind</span>(<span class="at">nms =</span> <span class="fu">names</span>(temp_fin), <span class="fu">t</span>(temp_fin)))</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(temp_fin) <span class="ot">=</span> temp_fin[<span class="dv">1</span>,]</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>temp_fin<span class="ot">=</span>temp_fin[<span class="sc">-</span><span class="dv">1</span>,]</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(temp_fin)[<span class="fu">names</span>(temp_fin) <span class="sc">==</span> <span class="st">'time'</span>] <span class="ot">&lt;-</span> <span class="st">'stationid'</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a> <span class="co"># # extract altitudes for positions</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>pos<span class="sc">$</span>altitude<span class="ot">=</span> exactextractr<span class="sc">::</span><span class="fu">exact_extract</span>(DTM,<span class="fu">st_buffer</span>(pos,<span class="dv">1</span>),<span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |=====                                                                 |   7%
+  |                                                                            
+  |==========                                                            |  14%
+  |                                                                            
+  |===============                                                       |  21%
+  |                                                                            
+  |====================                                                  |  29%
+  |                                                                            
+  |=========================                                             |  36%
+  |                                                                            
+  |==============================                                        |  43%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |========================================                              |  57%
+  |                                                                            
+  |=============================================                         |  64%
+  |                                                                            
+  |==================================================                    |  71%
+  |                                                                            
+  |=======================================================               |  79%
+  |                                                                            
+  |============================================================          |  86%
+  |                                                                            
+  |=================================================================     |  93%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge positions and values via id</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m<span class="ot">=</span><span class="fu">merge</span>(pos,temp_fin)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># make the var name working for gstat</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span> <span class="fu">gsub</span>(<span class="at">x =</span> <span class="fu">names</span>(m),<span class="at">pattern =</span> <span class="st">"-"</span>,<span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span> <span class="fu">gsub</span>(<span class="at">x =</span> n,<span class="at">pattern =</span> <span class="st">" "</span>,<span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span> <span class="fu">gsub</span>(<span class="at">x =</span> n,<span class="at">pattern =</span> <span class="st">":"</span>,<span class="at">replacement =</span> <span class="st">""</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span> <span class="fu">gsub</span>(<span class="at">x =</span> n,<span class="at">pattern =</span> <span class="st">"2023"</span>,<span class="at">replacement =</span> <span class="st">"A2023"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rename colnames</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(m)<span class="ot">=</span>n</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># grep the varnames</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>vars<span class="ot">=</span><span class="fu">grep</span>(<span class="fu">glob2rx</span>(<span class="st">"A2023*"</span>), n, <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># convert data to terra vector format</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>temperature_vect <span class="ot">=</span> <span class="fu">vect</span>(m)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>temperature_vect </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> class       : SpatVector 
+ geometry    : points 
+ dimensions  : 14, 11  (geometries, attributes)
+ extent      : 183055.8, 183170.3, 5748366, 5748499  (xmin, xmax, ymin, ymax)
+ coord. ref. : WGS 84 / UTM zone 33N (EPSG:32633) 
+ names       : stationid altitude A20230828230000 A20230829020000
+ type        :     &lt;chr&gt;    &lt;num&gt;           &lt;chr&gt;           &lt;chr&gt;
+ values      :      base    579.1            10.3            10.1
+                     ch1      578            10.6            10.2
+                   ch1_r    575.3            10.7            10.0
+ A20230829050000 A20230829080000 A20230829110000 A20230829140000
+           &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;
+             9.5             9.6            14.8              13
+             9.5             9.7              12            14.3
+             9.6            10.4            13.4            18.3
+ A20230829170000 A20230829200000 A20230829220000
+           &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;
+            15.2            12.8            11.5
+            16.9            12.9            10.4
+            19.2             9.9             9.5</code></pre>
+</div>
+</div>
+</section>
+<section id="preparing-and-converting-spatial-basis-data-sets" class="level3">
+<h3 data-anchor-id="preparing-and-converting-spatial-basis-data-sets">Preparing and converting spatial basis data sets</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create  template raster</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>r<span class="ot">=</span>DTM <span class="sc">*</span><span class="dv">0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create table to interpolate</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>xyz<span class="ot">=</span><span class="fu">cbind</span>(<span class="fu">geom</span>(temperature_vect)[,<span class="dv">3</span>],<span class="fu">geom</span>(temperature_vect)[,<span class="dv">4</span>],<span class="fu">as.numeric</span>(temperature_vect<span class="sc">$</span>A20230829220000))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>xy<span class="ot">=</span><span class="fu">cbind</span>(<span class="fu">geom</span>(temperature_vect)[,<span class="dv">3</span>],<span class="fu">geom</span>(temperature_vect)[,<span class="dv">4</span>])</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>z<span class="ot">=</span><span class="fu">as.numeric</span>(temperature_vect<span class="sc">$</span>A20230829220000)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to data frame and name header</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>xyz<span class="ot">=</span><span class="fu">data.frame</span>(xyz)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(xyz) <span class="ot">=</span><span class="fu">c</span>(<span class="st">"x"</span>,<span class="st">"y"</span>,<span class="st">"temp"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>xyz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          x       y temp
+1  183137.7 5748385 11.5
+2  183087.0 5748438 10.4
+3  183130.3 5748437  9.5
+4  183055.8 5748460 10.7
+5  183098.0 5748374 10.6
+6  183081.0 5748499 10.6
+7  183110.5 5748389 10.6
+8  183095.5 5748465 10.7
+9  183144.5 5748366 10.0
+10 183120.1 5748476 10.5
+11 183170.3 5748415  8.4
+12 183144.8 5748427  9.0
+13 183156.8 5748389  9.0
+14 183134.0 5748399  9.2</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="basic-interpolations" class="level1">
+<h1>Basic Interpolations</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nearest neighbor interpolation/Voronoi</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>interpNN <span class="ot">&lt;-</span> <span class="fu">interpNear</span>(r, <span class="fu">as.matrix</span>(xyz),<span class="at">radius=</span><span class="dv">100</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">vect</span>(xyz, <span class="at">geom=</span><span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>)) </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>voronoi <span class="ot">&lt;-</span> <span class="fu">voronoi</span>(p)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Inverse Distance interpolation</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>interpIDW <span class="ot">&lt;-</span> <span class="fu">interpIDW</span>(r, <span class="fu">as.matrix</span>(xyz), <span class="at">radius=</span><span class="dv">100</span>, <span class="at">power=</span><span class="dv">1</span>, <span class="at">smooth=</span><span class="dv">1</span>, <span class="at">maxPoints=</span><span class="dv">5</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># recreate CRS assignment</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(interpNN ) <span class="ot">=</span> crs</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(interpIDW ) <span class="ot">=</span> crs</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(voronoi) <span class="ot">=</span> crs</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># map it</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(<span class="fu">raster</span>(interpNN) ,<span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">25</span>)) <span class="sc">+</span> </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">raster</span>(interpIDW) <span class="sc">+</span> </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>   sf<span class="sc">::</span><span class="fu">st_as_sf</span>(voronoi) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-064ee7a3c6df1eeba8f1" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-064ee7a3c6df1eeba8f1">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[51.7982558102761,10.4013474458196],[51.7952834681148,10.4059969811846]],0.8,null,"raster(interpNN)","raster(interpNN)"]},{"method":"removeLayersControl","args":[]},{"method":"addControl","args":["","topright","imageValues-raster(interpNN)","info legend "]},{"method":"addImageQuery","args":["raster(interpNN)",[10.4013474458196,51.7952834681148,10.4059969811846,51.7982558102761],"mousemove",7,"Layer"]},{"method":"addLegend","args":[{"colors":["#FF0000 , #FF2F00 3.22580645161295%, #DEFB00 19.3548387096774%, #09FF15 35.4838709677419%, #00F3EB 51.6129032258064%, #041EFF 67.7419354838709%, #D200FD 83.8709677419355%, #FF003D 100%, #FF003D "],"labels":["8.5","9.0","9.5","10.0","10.5","11.0","11.5"],"na_color":"#BEBEBE","na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"raster(interpNN)","extra":{"p_1":0.0322580645161295,"p_n":1},"layerId":null,"className":"info legend","group":"raster(interpNN)"}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[10.3939202659508,51.7904612518831,10.4152658601266,51.8021360732302,true,"raster(interpNN)","Zoom to raster(interpNN)","<strong> raster(interpNN) <\/strong>","bottomright"]},{"method":"addRasterImage","args":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJoAAAC0CAYAAABsWTVRAAAgAElEQVR4nO29Saws2Znf9zvnROR4805vflXFIptDk02q1RbblkloYW1keGEYbUimFoYNL2wYhowGDFibXpS4IAxDq4a9MmwYXlKQur0QjAZsELAWFGy4LVhDg0WyWGQNr+pNd86bQ0Scz4sTJ6aMyIzMm/e++x75vwjczMiYMuKf/+983/nOd9SPfvSjv8cbjO9O/ui9ZZ//uP+D79/Utfw6I3jVF7AtrCJU2/1+3P/B9/2635Bwe1Cvs6JtSq518RvCXR2vnaLdFLmazvkb0m2G14Zor4JgdfiNWd0M+lVfwCp8d/JH790WkhVxG6/pNuPWKtrr8CB/Y1Lb41YS7XUgWRW/Id1y3DrT+TqSrIo34TtsG7eGaLe1LbYp3qTvsg3cCqK9qQ/lTf1em+CVE+03D+PXA6+UaK8DyURsviRJvkRRvsxn+VLcXuxr8R1vAq+MaLf5AYjYjDhEkVtmM4jm+ZLE+WJtvsxmpUWShO+c/d1b+11vCjce3ritBJMoArHbP3A0B+A7x//Ve1iBKOKfPvzvs/DHdz7/O+8V37+puNFO9dtEMkkSp0DZihUks1sioRX3P4pKq990st2Y6bwtJPNtLZLYkcsvq6C3dKu0cksYllZ/5/O/cyvuz3XhRkznqyaZiM2VxLYk1iuAJ9ubqG7XrmivkmTe88NK3nBvQzKly8t1wKtajVK+ier2yuNo14WMYFHkVMwE5SUMm5fAlJdsnw50u+4/XN2cagXG1H70ppHtVnaqbwVx4v6bwD3Qq6C6v1aOcFaA2K3b1FnQyhG2Zv8i2V53c3qtivYqzabyynRVki2DN39e8TZVuAZVK+J1V7hrU7RX7QDcKLQCbcBqMDh1SuL19n/DcS1xtK2RrKoQ1Ya5/9z/jyuNfWuzz2SdB78NWFmPcL492QKvoxm9vc6A1osNeK3zJSi8t3aRZP4YKZQJsgVAXZc3mZ1b5Y6Ev85V21dia014Hc3o1u/2ldTMe3Zhx71uQvGh+T7GNaDSh6+Uvn7CBabg0XaWE24NE/q6ke3Ve53rNqJ1GtsSuxHJFo4FqMoh5LoCulrhbnncfN3dDszmrQ73OgV4t/pzXkvNtF79C6/bx5MMttf/WDTJ+ppVTqvVP641vdfXQd22pmhrkcwHPNugeNM9yeJrbthrjbI3oGyGPM2oiDBorWqvC27GGShG1r2KtWog13QFXTfJCue+1jZcsXO9rj0arI6tFXHbVW0rd3GpmpnAeYhBS+8ru7Kafsbohn/lBVN6reY0MIv3pUUQt4rbTLYr372VJFs3Wu7JeN3e4DrwTsN1XtOWjn1byXY9d87HwNZRML8f1N/0V53as4xsceKCrZMpXF7mKUlNsJL3xXoEZtE5ahlXex1wJWegVs2KJGsDH3BdRbJteZirULyWKgrhkMxROD5FzssmXQ3T9yJIbEEEYoEE8F+jq1CHO5Akzkz2e4vhjyUd7stwG9PDtx9H29RcwnKSbUq0mv0WvMmKAqnqthfjNGFSICWOWIHEOgJVjz+OckJB+bXHRJBPz93rLqj+BDoB7I4okS0MIFoSd2vAbSPb9oi2iaksoqmNsinJrF0dnmgwcZJUzNq0rFji91MKWGEm22AGMoshiOF0itrpwN4uSwO7rxk2bqOVzKYpeJXbRJt2WRIj8dwtSZwvrcYBbCFPLdRlCbwCJAKZgrycYz94gbw8c/G0KvFb4jY5BhszI6uY40l2FTSZzHjJL9oT7CacBLWESVpBsIJpFiQBmSnk0iBnAfYsxJ7UB64lFUk5t9hfRsjzGcxvOPtky7gaQ66LZE0oOAVbI5hWq73EZbBSaoPJWCEnfSTWLj/NKhDlXmf7OGKK1TC7RGIDiQYl6LdP3edxSt6uRS4C5ALUvRlq1F3r8m5LW+1qtu46SVbtAUhJlg04uUlUTKwqvk+kTFSrkHmQk2wF7PkAGfeQaQcZ90nef0jyswckHzzAfraPnIdIZLDHQ5L395CT6dqXfxtM6MZM+a784GoXv4xkdURq07jfFKtUTSsXmqhDdT+9BefAK95lF3sxQA8mRGcHTC72Gc1/hdIW85WXqLs9Z2eXmfZbgo0U7bvB378+kkFZzdJhcjeuYuvCP+trCIHbyz42CYmjDh//q9/jl//f7/PTf/Dv8Pwf/GvYJ3MXZlmBV61qa9+W7wZ//73Wo7s3gT+u2Ixgr5xkTYpR94BXKVqxfbbkc7dN3t8ZdC4xQcxsGhLNDXGsefb5Ic/+z79G/C87yOXtzvbY7Pd3ldjOKjVLR5K3DlFsC8tCHVovkq3iBAAu7PX5Duj0gzZmtKEdVySZSP56HrvX1iqiSPPJJ4f8y//jrzP5J19BTtdvv90U1iLalU3mKngzedMDSTaB1JDoKr5Rk8KlmE92efLxfS7GAe9/3OfnT7p8+LTDr54HvDgN+X/+72/xix/+Dc7/8VcbHYZXaT5b35qtkGyVA/CqSdbkFFTUTmJb3610VdSom4ghibr86oN3iWON0YLRrifM43SiEIFnZyMGvxzx+P0v8rt/639Df+H2dMq3ItoCybRu9sKasIpky4KzrxqFaxcr9WqWbSpIi7DGMhTNJsCHP/0qcRpXC0PLnZHi6amu/U1czOD9Jx1e/I//HgB//T/8x+jDOeqgA+bVpV6tL/Zi109AbONlvg6eJdS3zVLIbN1jpYRsMJsihg9/8k2iqPy5MUI3gEnkt8svzePZuWIQwp/9z/8uAH/j3/4xdGK+81f/i/cw+sYHtKwk2rW3y6L5q881WwXtPcVUzTS1ZJOTdlH7Ro+TXM28A5A54ZKrpNHC/tAyOWk+jtFwMRcSgWGo+LM/+y4Af/Xjz/i3/skH/E//qNWlbg1LiVZLsm1mmbYtI3WTWLdLqri92kKwtoBPPvhtZvOyGfWE0+m56tSs+F4pGEdCku734z9/xN+WA/6jf//vvjeTGT/80z++EWV7dUbb1yt7HaC1e6KrCFgMZ+i63o2atptXt2L8TAxPP/oKF+OyQtoCqZSGg4GU1ku6+PdGK4I0LDOOhHEkxBZ+d6fHQPcB+N4f/OGNeKLXP4C4TgFrSHbb22dZpuwSKC3ts9OKpMuCuIaT51/g+dMD4kSXzKatUa5B13I0bh7EIgVVU+n7cSQMQ0WXPHPEk+061e3mFU3WrLRzG+B/LMWgbeXOyRQkMunmzXQrtc9s0Zs1XJw85PnTA2xJ3RZfF9fd301NqD+kV7eiuAJGucuPRDibC6FaJOh1qlsj0RqdgPka0eeqmm3isd4CyNHp6o1iBXHLIXI1apa9rTGvyyx2YJarqE0ZV3wSiQhfkQcM9XBh++/9wR++dx2EW1/RNnUGlo0wb4if+fGUq5ZbAY1ro22QveE9TZ2266yoBR+pqmbFz42PklTUzBZkzabb6bT3/6+p+zzUdxqvadtku7mn1LIa9iYEum7iqTYp3+sSrBLimE/2+PSjR6V1xbYZFIjkS4+kpHu0bwv7+M/KJFs4PTCiT6Cam+nbJFvtU9l6d1OL4XLbJMlWyXZ8mg9GcQfPX+v61U1YiJ9ZhViDTTp8/It3U2LVdUOpmvCFV7j0/NT7KsW7LuJUzaQX+5bd5UDvE6o1aqFsiPWfyKYDUJrU7Jq6nbZGtlZqptrfSasW1OyXP/16iWBic3JVnQFXbLxMsirBvJpVSebhyAYGzYHaoa+aA83bUrWF23MtPQE3VZilgo1VskiuNkRLBHvUcbGzpnZatZGfqpmIQa0I9FYJB4sk01k7rUwyqXTN2nTRKLpiEISRHvLA3KOne7Xn3wbZrr+Ndgu6mK6kbnU2sWo+6zZp0WYTMXzywW9jE+XUShbVrGgyvZoVSWZTczvouMvyRCoSzBaWIno4J2RAl101oENztsdVyVZ6AltTM1UYSHxLArFXbgNWlU1VVE/L6i4obzZTNXv60VeIoqBsNiskcwRUJZKJQGJV6f2wK5n3WVWwIooEDCs6c0fvs6tHjZd/ldDH9bbRbmHMbG2yLfu+BbJlClbb9aSdI5CS7Pjpl/jl+9/i8rKbKZhXJ1iuZOXt0sMLnF4qxrEwt1KrYFUTChBUpDhAY5RBrRgRvQnZriMWkL++JWpWRSt108o5KsVR4r54XlHdPNma2maVttX50VucnYyyNpct/C/OjQYsKFnpsAWSXUwVL6dCbF22xtxKRqzFNppky1AF3JGygt1Ve+ybveX3ZgNsKZ6gFyfouoVqVsXK+FsSQ9SQ4VkgnVwAutwuk2r03y/k0f+imkFuJjOT2dAm8++nkeL5ueJo4khW/FnPrGVmLYlIiVxFhErRr+nu7hCuDHmsq2pXI9qy2d+uO1v2KgVlGrBAtiXHV1rli2lon1VCGZOz+xy/OAS8eSyrmccqklmBeax4OYbTuc3MpTuWZJ6n4Po2E3HjnPPj52l1dWZyVw3Y1TuN391jHbJld6G1I9BmesHryDOrVM5euX5D1ClbY8+ASnuqV5xWrCaZ7PDi6f1S4x5Y8DTr+jWrSpZYeDGGcWxLbbFib0DxMJGIW1KTml0+EIrhHTlcOGdPdejrwfIvRnuybfZkllXVvo48s02qRl4BGdkm09rwxgLxqqf0SiZlkymisFZlalZWtWYPs0gyK/ByrLiIbKOKZZkclB2CBJhJ7izo9LvpGlUb0GVHrSYatCPbLemRXoJNiLNp3dzqfg0jwKVWdpRrl1nt/icamYfp0iGaDUtEqsbNsrZZA8m82onA2dwuVbGqylUX336bWutSiETTq4mhDVWPvZaOwSqyBbDF+FkSOydga/OP38DvoHqOYvlQr1zJIrEc2QoR0diRi1i7dKHYZGomYjh69qCiZhRULVe0JpKdTxTzJK0pQ1nB/CUUUSRgcbuFr4/CIjyye3ygn5c+M2j6dGmRJLUSW8+wFbGobQjlKpLV5bpV91/lkFQnyygcSy4vF7evU7LIIhPtkh7nQVqCymRxM5t0XMe5VVirSRJnPpO0N8AFXsEmjmTWlgk2mStmMZzPXRq2J1kdwdqSq4gQQ0zcGDvTWyogsznRguCV9WHWOiJ+XZFwbQsNV49XzKjVlMew+ocZC3KpIDLIJECmoVOxKCVb7LIybBIyu9zNyLWMZFUVm0WKkwnM0ka8xXmQVZK1JVjdnVCShgzJ1a30+ZbKWW5OtBpFkfk0m6bwSlgajW+hdOt4vP54xfkNxLpy7EmSB2x9A8kCiSBnjmDExhXdi/zrMslsEnJ2fEAcm5ITUEeyxLr/81gxmcM4gmlqti0p2URWepkebe6CdwQ0cE9GPFfnJbIZ1p9Yo/48rxOKJKuGNYqN+U26mYpl632wuTieE9JWdkqy825qKvM2WR3JbBI4giUpuZK8TVZHsiiBsym8nAqTuEyyuGgya7zM7BKpJ5lU/i4lISnE/0bSw1QooVFLkyOLWOYQvD5Eq5LM/6+S7CoORNXMlvuD3L8zjZx3kVhnxCJZQjKrnbm0OutiyglXJlliXXfS2Tw3lZmS4QjluC61YYwsNajhr4pzImbkzR8NDOmVwh0GzdvmYetb2ES2rTkDcjlul7u1LVTVS2z7NpmHteVR5xpIXMks4oS0ZY4vgyBnIGe9vD5tojMlk3knJVmAiMEmATYJmF4OmM1CEquypa7h70l2OstJVkzzSUSICyq2kJWxpOnfVLemLn4WiGaoeoyZZia0qnKbQF8ptFEM3F616PAy1KlZcX117qglqlY7frQ4aUackixJyFrlgFxKTjJf3HjBXAbYJCSJOiRxSJIYppM+s7mpmM6cZIl1nuV4pjie+mBqrmJewbyiFUlWVavsN1FZikgQzok4logJca2Z1SiGlM3osvShKupUTf84/q+vNmhUr9n43jaKprOYB1cDT7JSFUmvgGKR6QQ5O4H5LFczEbi0yGnHxch8xL9CsiTuksRdRzZrSJIAm6RhjZRkmRNQINksUrwYC0cTKSUsZgSrhDIc4dxfE6GKnegRlhmWKQkXxJwS8VLNOFYzImWzVCF/7H3pE0qeENlJjd49fXClx3R102kCuLzIv+myuZTq0Mbcid1smF/huHVK5tcpi5st5eLCf+AbU4gVZKJhFuZl2msb/s5UJonBJgYRjU101gZLsrCGex8lzrs8mUCUkUtKJPPciUVIoKxcFVNZfPc5E2bKect15nEViiGNLiExCRZBoZaa6GXYjjNw1Qj+OvvXkdKbvYZ5o0okq5EBiSI4PydrLMU2I1m2je+zrCpZ1HVLHBLHIUkcOkWLg5RwOcmsdeSaRoqjseL5WEoxsjx64ogVp53hc5GsjeZIlzsDY2KeMuVzJjzhko/VOCMZlNWtSs7Gx1F574lnaka3N6FqPrfjDLyqQbxiCw2Whn7JKsmqiBM4Pa/ulJMsERCde5dWl0hmk5Ak7hBHYUauJO3vnM9DXhwNiCJHtoup4ngiaY5Ys4otvCZ3AmKES2ISHOHmJESqfdPFH8srnUGjUhPrUVXBLgFToiv1+Fx/kZdNUGd+i+bTK1a1fbhsgrKiaS/i5KxwCsm3TZ++XAr2uJ9F/L136dtjSRwSR640exw7s5mkJjOODbO5zoQysb6vcjnJPBEB5uLaWAmuI31GwoWK8mteolLLovpVwi2DwaCIMUoTbejv3Q7TuSk8sYoLZCY0b/BL2bz6QjMnZ0hss6XEhjhVs1iVupWKoQvXJnON/zh25jKONUmiiWPD+UWHxLog7HimOJmVlSxJg7BFU+k9zESEuVg+VZc8UxNeqhkv1TQjWVNsrIg221gEjSoNVKkjaI8Ob+n7jUPy6lA0n9ejaOs6BG2P4YmjGhyIgie5QLLK55xfLpaiyvt2nJ2ag30xdJ6m1emocheMFauzhr9fPMms1ZxdhNhEESeKF2NICnn8nmRNpjIR4SlTZipZaFtViVP8rEmd/D5NCpebZtfgrzuOI6PZ2Hxuh2gFQkiSoIzZjvdZNJFFLAunFI9RHUrkP7+YlElWPJwnGenHUYBP93GZGNp5lNYTzKlXHOf/RVT6H44uC+EK2pHsBbMFkhUJ1tSor66vEsYTqQkGRZIqXB0GdOmpDhNqMltW4HrbaE1E2eQ4q47RFMooFpexFi6nSJQskqxYNrG03g2Vc6PKdRbK8CYzUzSrHdkSzfgyIE5UljdpJVezIsniAsEATmTOGRGJklqS2RLZyqi7O7aGNMvUzaBJlpRbtwgdQrQyWFmvLPu1eJ0itpx7vy1T6qF1/XqoN5l+u+nMzfTbRLJsW7fYT9Ls0jR50auZpNm04vswRTk1S0kWxY5kx5eFSo2Q5ZIllFXsUhKOmJXIVSRZvm7J7Sm81qX19QrVpG4hOu0vqMehGjFRU87kvHGbOtycM9CmD7ItGauN/xS13UtJDKcXyOkYmUTLSVa1SFnOv1c0k3aSe8K5MEaSuPTsycQwnbtg7MVUlU6VKRo5yWZieSpTTigPTaySrNojsOzPn88v/nh15rbOUWhqoxXRVz26SwrDFOEdAg1w5W6otrimIXgLE5N5NTu/cI3+YsI9LCdZ5Sn5UlOOVAWCeVVLX09nAZO5zlKyfWJq0QEoepgvZM4JUUnBLOK4jZBgifHBWSFRlriyWCWlxX2NZk+zLdmWQaPYUf2s2HJbbK+NVjSPVmjMl1tlRqtOwRIz6aGUzol2MXYd4oUupPL5l3+NbLOn3ttM8/5rzKYVxXwecHLaYzbPr9N3LkQ2j+5HVjizCRMSkjRAavHms0wyQTIFs2l7rY4QZXOpsErQvlxCahot7UxpET0JVs4Tv6P6zHXE2I6Xb5hiK0ST02P3okCihXZaEauI1ETEjMhL2NLrOSWrlkr0alZMC8q+gN+u+t8nPhom432iWZdoHhBFfjFEkSYpjEpPrGI8h1kMkc2DouOUZPOUYFWSUXjtiRUrixQ+W7gd6X+VpmBvSrZV3mj5nG67DiFd1WHMaqJ97w/+8L3te52ebMtUrbp9m3VtERjY23Wvj07y9UqVY2bLLum4i8zS4Wep6ZyMB8xnYRqY1SRWE8eqRDKAeQyTNHye1ZaFrMuosb3kTW2qZp5kReIVUSSGppls2XeifYM8QNeOH6hinTTv7cXRqh7eDfUWLDgAVuD0bKFTvDZm1gTf3rFVb9ql+vjD+bz/4iWEBkKjiBLBaJUFat2pcyUrvl9op3lFo0i2HJpcmHVGsNVkK92miqq9I0MOTd4/8ELGXKjF+inFgO2O6oO5y/PkReN5itcMXI9DcN2TVDQef2/XPfFNEJPJi0pLUIkYRnunKCVpNobGisrqvGT5lwq6obBX6KUpXqGw6Njm2+VtM6scyYoOQaIsSapySYGQdb0GTT0J/loGEvJFGfElGfE19vim2i+RDGAk3ZVtOd3CQ/XYiqKpXh+ZThZVDd3OfG6AWpIV22WjEUpduCmg60xmU+zsLEQuC667tmgzZzbtY5dMFubLcPRDi1YaM8lHF/mZS/xSG0WpkCfBkhTaablSpQ+3pslZfehWCSPboZN2i4doDIoBhh2dTr5B/djNu9LnWKZMCx34decIlCFQAbEsH3q5HdPZG7iJLq5XwNaDtTAYuNsi4mJoNSPOi5CZQs77VKsAASRRkJWbUkrQygtfSigl9LqW0AjaCPcSw8uxIsGR4TAIkBhe4uZarAZms8tWOckilaTKlicxKjSBq5GFknLPo0UcocQQpH2TX1Q7peqnWuX7NGmRUvCloM9ndsyU5UTr0eG+ucOT+GnzjWWL4Q2lNFLtvrAWsRYVbncm3JVqVsRgAGJRYQBWkPPJoj0Dt26WljHIJo1wj+Ty9CHTaX2AUilxfgaKfjfBiiIE+h2BsUIrlRHApKYmqZCsZDZT9YpUQkTMLM1vBddFZNCEdDmwfQaEhKLpYggLiqVTV0GjVoYpPOq0+qt2j5mOOVfLJyJtM3iltMWNBW43xEJgdh2EIXQ7qP0d1N1RecSWBUnAHg9TO6az0Mbs9B5nx/u11ldpSu00rQWtBKWEXjfhrX2L0RAohVGu8N3Cd6qYTUnNZkTMJXPGTLmQCfNUWfp02JEOPQJ6YuimZrFNeKJNeYPiJg8Cd65sfxTnTBb3WZdocAWyrTvyaE2sfYym6wnStsndEYQaOm47pUCNKjcxi/zr9JCSmk0pPZB+L2Z3OMcYITCWMLR0Qkuvawk0dAx0jaJTedB1ZhO8cpk0NScgJkGh6RLQk4Cw0vB1XqiqrFNLRz8WTWkdOlqxEyoGUrZGTZ3xB2a/+WTcVIZtnLiHuiGuTNRqmQRfMejOLkymyHSKPQshSZMbsx4BTW/nBftWc/ziHiKOaEorlLh2Wref0O06tUkSl4/mG2ZhaNnpup6CWQzDQLM3DzmivuzqIzskRDMl4YWacKwNR1wQEpTIVwxbFB+7J0Fxna55vwxGKXpGEWoINLWlR4vwnue+GnHMyZLtarCRqq0YNyDJemkl2X5tSNZmPGlDlUo5nSInAXI0co5ADXo7L9k7PALKqtbtxgyHE4IgztYr5ZwBrQSjHRmNhn4I+13FW50OPQxvqwG/pXb4Mjt8lV2+zj67hARpWy5E05OAEX0O1A47dOmmamZQGFHZQ1YF49UUbigqV1XNNNA3imGgGQaKXuBIBvDt4ZC/lNzPj1MKFNe/rsP2FK1NvphpH+u4thhcpeqQXCrXNqtC+yQe13wPwhnd3pzZtINSQqeb0OvP0ErwVRu1VoAlSTQuemBRytX/F1H0OwCKx3GXntGug11csmMkzmGwKAIUHTH00+J4vTTRuktAJyWbJ5k3m1WyabVo5uqeUE+79mM/rDe1oYZuer7ysZa/r+JGB6dk2berttsWyZaNGVUaeXGCvBhQLdGutM17BbQjW6d/ysE9y/jsgPH5kMHwEm0sNtHO5BqLTnsBtBaSRGXOAqSepSgiC6NAp36kj6qpPGlEnJr1CRDASO6lmjRkEYrOPMwqwaqPuxonU3jnxGWYDEP3v1TRvnKMXurt+jodzarZnBDZKENrm8+WOWmrSHQjU17PZ3B6jn1ikHn6W/MTUaQl3JWf1yn9TOmETv+Egwcfcu/RE8LuDKUs2li0SdBK0DpJA7eSze9kCr0GRjsihkZlnqjx/3FeaaAc0bpoemIYSMhQQgaE9CSgK4YwjaWZVP1U9r+sZsUnonHnCpRiJ9TshIpRuEiYUnsufXMYBBzaAQlJFmqpwzJV256ibWFs57WQrKpqUYQcXyKXAkklNqatC214smW9iECQgNWovQt6OxOST7+E1pYkyW+hshqtJSshmiSKbmixophFblynyTspUaLS9qVKQ/ziShQo6KRlCUK0U7SsJ8ARKiiQzDf4qyTzaqaBodH0glzxtMpDGZ5Qxc+y76RgYDT7cZdPVtxqg0mToJozTWpxU3G1K8XH2sCrbRIjp2OYpDdCFf6rXL2K6qa0Rd8/wTw+wnzhOWo4Q40mDB98hNYJxsRO0YzFZH2jbnDKfG4IAqETWga9NOiaOgeBdq9DnStb4BcUXTQdXJysh6GbqlwHH6DNFS1EZ+bQj1PqKMVhaLjTMdzpGvopybK4X0uSAYy68K4eLFUzgC+Yh3RqJsL44Z/+8fdXylBrsgWB6wHw4ybrFoA4KRHrRkyltXB56Uh2kZ5vZmBW6bEwFtWNUP05am+MOjxH3z9FP05QDy3qjkUFFhUmqMNzBm/9EhNEBEGENkk2c0ocuzy1KFHMI8080iglPDqMCUyBZKZMtkArQuWWjlL0lWaAYYBhSMCAgH5Kug6unRb69hYKA+wGhoPQMAo0RnuFc8hItQbJPEKlVhLN7VdvPrdrOgc7rv3T9LlHnEBgboZkAOMx8rxyXRY3KLjQDjNvXaB2y7dEvGkD1zlvxJk9LOxdMuh9gH25y+z8DmIVk8ueG59sFZOp4WKqCAyM+jDoxfQ7ko2QSqw7cmxx57CCFB+U+J6D+uIq3hDuaJ219cKULdUG/lVIppjN0qYAABmRSURBVBUMjeJhvMfnanmN7rocte/9wR++16ph1VrV1irWsl6u+sa4uFgkGaB2EszXzjHfGBN885LgG9MFkgGlqXgwGjoWQgvdBBWkvuPeBb17n9HfOcMYm8bR3Ff0I/u0EoJAeHx/Qr9jCYxgtDukqjxkRxKVmcNQKXpK01OavtIMtWGkDSOj2Q8MfaPoaEeyfP88W8SbSr9+XZKBC3/ctasnuGjqCttueONVFXupIokhipxCvJiWP9PAjnHEWbO0uTIKQjceQRIgAsIYRYDYmKBziQliwlDT6WiGfYXRhsAIw0FMrxehtWXYT9DaECcuI9fEqRr5RMrKw2r6TVYJ4zdrayqL64rbVdeDM/FBiz7NuopDP/zTP/7+1uNoarSHnFfktXHsgCx+o01QrDaZxMizU5gVnk7B02PHoEzN9bS9jtCdS1mQri1EwsAML9g9OGJ6uUO312FnJySONUFg6fZmdHoTgiAiDA85OxswnRnMzD0YEeUKFxUu21+Rabi0KpH8usTWk6aJYHXHqH4WGhfHW4WmEMf2A7adHlTn2lhWSM8TZBuEi+bI8UWZZB7p6VUxsNUGle1UL3D5bV1BWUHOE1RokQsF/Rm93edoE9PtdYhj52wEQUTQmWDCGUolXF7sEgSWINH4bOkogXniBrRowKQOQh2Zmi7Pv+ykotJUu7b0fZYQrPi5Ui7U8u3kbf7cfJKeb3EH3aB6rYnm22ltat6qOw+Ql8sT4UqwlrTPZjNYgeNT5DRavt2OWU6wZbPYgZObtBNQpcP52BFXeUjPUf2YZNyn0z9BummWSBCjOhF0I1SQIFaxO39KNA+I4wHGCCKa2MIkdl1RoVJ0EMJgddS+7tL95XqiVodNFLdp+urVz3d6aYyvtv+hcJwK0X74p3/8fbd+TWy9w93mYY+NECdwfr6aZAONahpHUJ1V2MO3oIvvjUkXnS+BQg0ENUhQnQi1M0HvnaPvnKAfHKMfn2DeOkM/GqPvj+k8ekJ/eEkQWEzq9SYCF0nCeZIQpYwoNupdrC2/VL8UHYpqg99/pewyjVuKbbaSc6AWv7JW6XztWgjRK/s0m5IgN2q9tyJbm6zaaj9knKznjc5myEdHyMvlGaAMNKpbI951BKu7276SHjiShYF7Ylo5U5ySjRDMF09cHG40QR9M0Hdm6Eca9c4u6p199P0QfTCh278kDGMCk3qgyvVBhsqbTBcD8wFepcrc9ssy0lW38e87gVs88fz66m2pmm0/fGVZRm1Tftu1daqr3UPk6PnyElN18INaVrWhmmZRraKvFkm2rDFS2i7tvvJOS7X0fCofyk+hGOCchW6E6iaooUXtdVD37sHdR6iwizz/BHXxK/p3n7AzHnF52aUTCP1QcWANkRVCrej4wG7lVlQvs5r5u8qRrr2tnlA1JrbfEQLjVoQuZ50AXRu8nRPzLHmZvfdmEzZUNGinaqq7pBDIskHC/uE2fi7IL18gn61X0QZoRzJfTt6mUdUsBSPt4agO5lQKlbJCBdqRrGuhp2HQg9EB+s7bqDtvw+gANQhRowm9/ph+f87OMOZgx/JwV3iwozjow7DjVCc03uy5B95kOusUrm5Z/Op5Hp3RbvExvuptCdLurXsyqlU1hWocDXWlwNdKsg13XXn4bcIK8tHqAasLWNYOy7bRZdWSmvCLFVfbI04WWtfKaAgNamihgyOf1hDPkPOXyMlTuEyrf2uhv/+U3f1zup2Efjeh37H0O0I3dEto8oefEytfVyRJMWOkDnXb1m1fPE9oyinrfszDu3ZEt2Yi2WvN3ljljdaO+WwDb0Ihe9jy6Yv60EUTQlC9sL2K+XNFcf022XVRJpl37dIgsHowQp6fI7FFTaauNkk0d2lS43NkloDtQJAQdmZ0OhFxnHqzmtJ8BNVTQS72LqGy8tmKMgZVLGuhuDacyxaGtHsr/frVcQtQbrsVzSbcROLjVRQtI6dGXhy3J1kAapRmEbRRsex1SrK6z+sIZitk8/BmNbLINELJufuxxQkyjVz2SEqi3vCEnVmPKMrvU6JdTQ+V5GWv3OncPkWClUYObin+XYQuqF6ncHAjujnWUnecbV3QMjOqev31+kGrODqBi4Q8DZXlg5UzfrZs9Ptt46Tg+6dmTxfet0U6SRkRMEuQyzlyeomcz+AiQabppBiA0gkmiAmCxAVxA5t6ojYLf2SzPKbD+fworGooQy1ZlqHtPqFW+L+ghmURSWOMbaudk7VkS++SGgyzoW5rY3+3tsO7iWxqr7OeuYRym8sTzBhKgzdLJbYa1FUkdWZAIoVMgbHAWJALkEuDTNOpflJV63QndHtztHYEM8W2mRGMycmls1BHmXBV0i2L2rQloVaSjem5mGqez/KGfp0z8CR5VptlAlsmGlxjsmTTHamQTR00kGwZigEjTzJPsMCsHlRTDLX4Wmw76T5zjcy0I9ckJdksnRY7HZcQdCYMdi6yzI8q2eoIl5Mrb0NVybPKA122GA1hmJNmMlccSR4ULw+QUen5m+/7taRbNJFN9Qabq9oy8qRkU3tLgsTL1CyKF1vVfhs/Y96qvtriaysudqcFIo3MHMFkFrrJy+bpBBmF2mrGJGgtGGOzUe8mDWf4Wh9+KJ8pDucrKFzRtDqvdH0z6iFS9lRDQ4lYRsr3Q6OyXLSqIwDX6Axk3qj6b0reqDJBWrdsTS+0LuOieNzdoF0Io4gkcVmHTft5rDXZbEHZrEIik5VY8HOvyzxE5p20+LJ7OEFnymjvjLOTXYIAlNJZ5of3QpW4LA+LoIx7ra1gyb3TYrdssSFvi4OOG75q8bfmg7SN72vaYsv7QK8blxeZaw+4yWQ3cY3CEIbN+8k6KUc+GBuvIJC1LretGqAtkim7AMkWSSySWNQuqG6MTENkGsKsg0w7yLRLPB+4GVhSZVAqodOdpqpTLr3gOiHK6ub2kdTCl01n9TWUTWwTiqoXhuV7U+0mrrbRLpkTE9eqGdwE0SB/YHEM1qKCzvomNAxRo4ZK0DtLOsybrmdeE8HOGvJpULa4LMxbUOivSaVAbHFWPJu3H63K51232ilZWkq+CBPOObyXB6Nzgkkt2TLC6fq2WvU15NstI55XL38OEcWfP4tLZAkrpnMsE/6Xf/TfNrbPb24AsU1jEqLBBNSWuVqFOsUapn2ZbdWsjmCQB1ylSKiaGFqDt7kwM97C8cvXp020QDSlErRx5RVE3AJpqhCCTQPDvpyoKzOf/tdOdIsj55XKL6VoUkvXUSGbFUUQ2NLtNFq4FF+jzaGabXtP7dXeF4+bn0bRWrBzF/IIQzcpa1uEIerdfdT+HQi77qd88hw5aS4uUvo5ryKZh2/sFBWsLlBbULLFYwJJmjo0myLHO/hS8kolKGVK9sSPjjfBjLsPP+fpp4+BlDiQ1c71cEH6CukKZHOXqRYI1kS4/Lj1H1RnHy5m23YIuSPLxxPcjOmsg3+IgSkPx1sGpVGdLvSGjmTjU+TouN355vEiIer6dqomsRyar88iLO4PaUDZBW1FQIWJG4AM5CPhE5SyqJpJXd36cl+kD2V4E7q4jz9u7iDryv7l7eu90KDg6Za8zgKxLHBaKM4XYvjP/+F/sjSs9eqIlkJ58ijt2nHVcaAVZEP05hPk6dN2JrNAslr1gcUwRd2SX0T+suoY1BGwm6D2x6iey9tWutxk8GTzxZm1iej1Z+m6+sttcg6yzwtkq2u7lY9VaNPVEPmf/koTFeYi0MAH+gUGzSPZ40BWz6LyyonmocIwzXRI8iWJ3VJE00zCm6Kp77KKmvy3pSQToHDpquMGJ2fvVbJAuCL27z7LXutMWXJVq2IZ2apoIlyQBouLgVsRVeo+911QAA9kl0Pb5z/9h//xyiD9tRPtx/0ftO8pMIELY2T5X+lN84RL4jwL4smn7Y4ZJQsqttSEtlSzRmUsXncRSqA/Rw3LVSU92aqqppQL4Dah6oVCsc9TFkxpnae5EMytyTf9iyeGI7vYtg0xHNj2sxHfGkUDUMY4ZQtXhD+SyCUULjObsUUmkZubsw3azKpSR7KmCTP8syl4myqwqN5q58eT7eDu8YIZ86qWvy+TDVar27LQRvV8ofY12Mp4bJeXEq3iVhHNQxnjlK2BbPL8M9TjL9bvHAao/X3YKbQbahSmVpGqDkCdQ1BEY8d6/Wo0qOEMfecsdQZSNauomkd/eIIxabutJlGxahqXOQl12+sSOYWOH3mfnitKVDafVXr5ADwOOzxc4WVWcfPhjZZQSiNK05iiUW2jjVylbaU0EkVufOcKeLKpljG4WiWDRTXzIcPqc1cujKJGUzSQPD9oPJcPdzRlzRbjZe69uyQfV/PvIV/njlv2s6rqWMTT44BPK7VUHgQh53HCbM0Y6K0lGpArWtUhABCLuncfuRxnMTkASWLkRU1cbUkXVZFARdK18lBXmVztgq4g5aBtUP8DUsrm3VLautq4FXK0RZFspXPUHK/XTRbW13W2DIzmJE6I0l/Vf/Anf7tVG/xGTOdaDkEBSqUEMkGW15bh/BiGe6heP58ww1rksyXjCVqMnPLdSGuTbB0iaMhqsKVo8kAfvP0rOp1yu6401LQQjqhrm9Wt8/vVvffOQ5xozqZ5xgbAoQkZdV0tt3VxK9toVagwRHW6Lt4WdsAELjU6iUrks0/SkMAqldm0ktE2KiAVi/9B1k4rbVJpqxmz/nnXIVu/nyw4B7O55sNJXqZ+Twc8Gmg3e19KtLZqBq8J0YrIPdMQxmeZWbWfPVuxZwVtx4U2bdtEZp/GXYdCuEJ1EvTu6nak0pZOZ46uIVtd+2pVc7NKtiLJ/H+x8Owsp0ZfaR4PDN0QPrsQPrTjtUgGryHRPJRKU33uPIJOb7FB33IS2NpY2bL1dccujRBpcU4lzgPdL8/eWzSfRVXbu/s5/X79JBhLT1OjatX1VWglfPqiw88u5oRK8cV+h3eGQVq63uFv/sn31m4K3RjRNm2ntUK3X58Y2ZZsHsvI1Xr/hs9qLk81OAQL22lX+bst2pCqGyYM+3EpE9fj/TPXJny7F7Lfh0GBZI9HG+QS8horWobnn7pBud1wO2RbhWVqVve+Cm8+U1Uzj14u3z7FYOeiUdWyhvwKBfPrOoFdSGx028Gnz7s86oa82++wt7oLszVef6KlUHfuo/aG10u2bZMWUMN5ySFoMp/9nRPu3H/BcLiioM0KrFK7aQQHfdivIZlWsDfYrOrTjRLt2sxnGrxV+3fqqwbB1UjS2DNQfC20jmFW+jCD3/qs1W6d/jmdblnVqt7isvYXpKUOCmpW3H7/4IJHh0nj8IxRP+F3vvVhq2ut4o1QNInnbgZkgL1dVGcJ2ZpIU7fNsm2rlicprGvbTvMPWYMOc6VqUjUg65Jqg6p6GS30unEtOXd3JyRxwGyuF/b1+J1vfci/+s/+y43E4o0gGpMpcnQE00tUfwd1/y768X1Xd6MJbfsz67ClDKUizBef18bUqtg9fMrde8tLsNdBK+h148J79117vYj7D4+48/AJs1nALCp3a3nCjfp5j8UmuHGiXYv59N1Pl5fufafn5nlfMURva4g2MMtFpyDFsvy0fBvrSiisoWz5vvlrE1ju3D3j3sOn7D/8kMvzfZ6/rG/97/Qsv/31T2uzgdvilSjatsmmwhB6XbicliqCqweP3MipDbpMGtF0r5c9gyV5ZUWovfFCRgcsms+d/efcuV/uzy2SqOp9agX9fpxtt7s/5vDuMXfe/hn9/aeMjx7zwc8fcDkr0yEwwrBn+cqXnxGGs43NJtz2TvU1IVGCqmQbqHsPwLxAzi/z8qCb4hpMJuBUTRT6zhgZ95DZ6rhCpzul34+YTJaXcFVKGI1mbmSTTgiChLtf/En2+ez0Hj99/x3OJ+Ue9MAIX373lP07G9Siq8GbQ7RuF7UnjlA8Qx3ezX7m6uDQzWo3vkJooIlk65rNJZlP7vOmhMRyG6k7OOPeQ+Hls7ucXyxmuva6MWEn4a0vfUAwOKs9ZjLZ4f2/+DJnY1NKJTJa+MLjixLJrqJm8AYRTSmNBAasIGcTsM+dmnns7KCiBGkacteENiq2qdLpQupQpmpn8FxhZ32UTrKSCbBItk7/nN39Toloo9GMh+98TGe0IhBsNT/559/k+HyRAnf2I+49XKN8fwu8MUQD3LjPO7vIyzM3unw+TSfYADUYIlqhjk9dMbxVaEOeZEVsbV0oQfVjVJBAS/HtdKfcvXvm0rNNwmB0tppkwPv/7Pd5cVo2uz4tvNspOyVXVTN4heGN6/A+VWFQo0wi5MVLZJJnSKjeAHX3DmqwOKdkhlVF/rLtKlm166B416umUgn64QlmWJ/ZsRBXC+d0e1MGo3MO3/kZvcPP3TGXOCAf/ou/wrOjxXugFdw7mPP4nXzgzzZIBm9KHK0IndfhkFkML0+Qi0L17rCDuncf/e7bqGFaNbxNFckqhNJwuq3CSDbgeFXIYzYZEoQRgzufLpKrhnCf/OQv89mzQW3ewMEo5t3f+vhKl96EV0q0a1E1Y+DOPqofuso+8xhOzlzBYg9fhfL+A9TewM3v1DSzVx0as2+vdu1F6PvnmL36wKxXtdnlLgDDu58sD6GkhHv6i9/h4ycj6gaGjQaWL3/tV6V121IzuAWKdm0mdDTK3kuUwLS+0aMO76Leeow62IFwjduxzVBHHUmUlIK5VcwnI4aHTxjd/6h1nG466dbOhOQCsh+1vdqN8MqJBtfUW6AVai8fEiaTCHnW7EmpvQPU4V57sl2VaC1Oo3pRqQ/UIzg4YnDnUzfvVJBk40CX4fjjr/L5s/IQuU7glOwrX/0MrbfvABRxK4gG19BboDQMCjfWz+e0pJSC2hmh7h+iuleYaW9T1KiS2p2iRpfZ+2B0SnD/mfNOg/bpOuNn7/Dznz9gHvs4mZt658tfesk3fudDOt3piiNcHbeGaHA9ZFP38rGTMo2Qzz53ZRWa9ukNUA/uod997AhXvUMt22cL/fMtzdsCtMX0LwjuvkCNJmBdedKF665Rtfhij7/4v/5NfvIXX2A6dyR7fH/Kt//KB/yl3/0Fo70l5b62jFtFNLieflD16G72XuYx8vQ5Mr1s3insQBCg3n4L/aUvoHY6qF6A2knLom4//9GhSEZREGk3iGVv7Ob6nHRqSeahtHWEs4oP/tm/zvv/4hu8PAmzPsxq6KIJ2zabcAuJBtdkRguZHBIlyLMj5PhocVruuv0fPHQOw737qMMd1N3hdi6s6e4nCuK0uLJJQIur6J0WXV6FX/zzb/PZ8x5HZ3lAdneYtApdXAfJ4JYSDbZPNv0gVTUfL4sscnSBvDxDjtp3HKu9fdT+IeoLh6gvFo65DSQaEoXMjSNZEb4M6RIT/PRn3+KD//ff4PPnead8YOD3v/0BX/v6L1ee/rpIBreYaHANyjboLH7jRJDTS+wvP17qlQKlwcpqMET1+uivveWOeZXOPKsg0chcI/OKI5IYZzJL17FItpcffp1ffXTIk2f9rBn5l3/3E37v9z5odQnXSTJ40/o6V0Dt74M5R07LNcqcIombqyn5zE3kGrS8NVqjv/4OWIv9+InLfbtYU+Ii7SaWhXJHuyhk3M3VrAaXz97m+MU9Pn+2wyxSvPvWOaO9C0wQEQTt6gNfN8nglisaXIOqjUZLewHkYo48fYZcnNc7DE2Tj2mNfvdt9NuPUHc66LtL+lMhN+Ezk5Ns4Vp6jSSLz/d4+rNv8eEHX+AXH+2yM4j4xteec3jvJd3e5a0iGYD60Y9+9Pdu4kRXxXcnf/Teto4l0wny6Rl0ax5wMXzRNahBF7od1KhQ3rxNWdN0bk6iGPtZSlhPqEhDGtNqJNl5v9bDlGmH8ZGr2P3i6T2MsQRBzGA0JqwJ7i7DTZEMXiOiwZbJNp8hvzpB0sEYaljIxqjGa0ONOthB7RXqmbWtoeunxzYBcnqC/egCZSSbf10uBTkvpOtMOsg8cOENqyGMUZ0Ye7wDVjMfH/D0k7e5+2DNWiMV3CTJ4DVro3kzug3CqU4XvnIPfvEcmSlkXCgB2k1J559/ZJEX58jROcSCujNE7e4vNaN1r9XBIebgsLSpnB67flhjoOsqJWXlVa11VZOmCeM/eZTtc1WSvQq8VopWxDbVzX70FLkomDCrXKM8SBvmxal2OhYV4uYEHfQgil27r9u+cHAjiiNMkpj5/zpjcvSoefsNcdNqBq8x0Ty2RTj79AVynM7ftCwoKoufqQPrOuMjC4mg332QE89aiOZIkriuryh22b9RglzE2M8GblKyWQc7GRDPByTRCkfiCngVJIM3gGiwPbLJ0TH2WZQ11Os3qnMgKu9D64KvDceRyGCf75FMdphPRrXbbBuvimAetz680QbbCoGowwP0W31nMutQR7I6RNqRryawap/tYZ8eMDl69GtDMnhDFM1ja8o2nYDW2J+fls1oE9GWOaDp/vZ4CFHA5bO3t3GJrXAbCObxRhGtiG2RLvnpUzcd4UyvTTSZdFyXUmyYfv42Nrk5J/82kQzeYKJ5fHfyR+/9uP+D71+VePajp8hpQ0JkqXxVOr11bIg/v8dsvN4MI1fFbSOYxxtPtCquQjj79AVKK+zn9VUfJdbIi90bNY9F3FaSwa8h0YrYlHRyegoiTP73d7BJiE2ChdmEbxK3mWAer1XPwLZR9FY96dr0Pqi9PUQs0XRLCZBr4HUgVR1+rRVtm/jm//Dfba2nog6vK8E8fkO0a8ZVCPi6k6uI/x+k6kgHTxEqdgAAAABJRU5ErkJggg==",[[51.7982558102761,10.4013474458196],[51.7952834681148,10.4059969811846]],0.8,null,"raster(interpIDW)","raster(interpIDW)"]},{"method":"addControl","args":["","topright","imageValues-raster(interpIDW)","info legend "]},{"method":"addImageQuery","args":["raster(interpIDW)",[10.4013474458196,51.7952834681148,10.4059969811846,51.7982558102761],"mousemove",7,"Layer"]},{"method":"addLegend","args":[{"colors":["#040404 , #0E0D24 3.95351549263433%, #5C1160 23.7210929558057%, #AD2075 43.4886704189771%, #ED5F48 63.2562478821485%, #F8B63B 83.0238253453199%, #FFFE9E "],"labels":["8.5","9.0","9.5","10.0","10.5"],"na_color":"#BEBEBE","na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"raster(interpIDW)","extra":{"p_1":0.0395351549263433,"p_n":0.830238253453199},"layerId":null,"className":"info legend","group":"raster(interpIDW)"}]},{"method":"addHomeButton","args":[10.3939202659508,51.7904612518831,10.4152658601266,51.8021360732302,true,"raster(interpIDW)","Zoom to raster(interpIDW)","<strong> raster(interpIDW) <\/strong>","bottomright"]},{"method":"createMapPane","args":["polygon",420]},{"method":"addPolygons","args":[[[[{"lng":[10.4007941698151,10.403074668674,10.4031274461456,10.402563757283,10.4010070715218,10.4007941698151],"lat":[51.7979382414113,51.7971382165957,51.7969635328109,51.7963980077586,51.7958499530251,51.7979382414113]}]],[[{"lng":[10.401107058768,10.4010070715218,10.402563757283,10.4031855501495,10.4038509093078,10.4038515949334,10.4036360683153,10.401107058768],"lat":[51.794869120668,51.7958499530251,51.7963980077586,51.7964889638942,51.7961980660857,51.7961968347999,51.7949682161029,51.794869120668]}]],[[{"lng":[10.4007416640621,10.4045594312691,10.4034478532546,10.403074668674,10.4007941698151,10.4007416640621],"lat":[51.798453215373,51.7986027951028,51.7972549127377,51.7971382165957,51.7979382414113,51.798453215373]}]],[[{"lng":[10.4062504868943,10.4063021696821,10.4046767906993,10.4043508490523,10.4036869436682,10.4034478532546,10.4045594312691,10.4062504868943],"lat":[51.7986690105617,51.7981615017577,51.7972194127972,51.7971004547037,51.7969628064758,51.7972549127377,51.7986027951028,51.7986690105617]}]],[[{"lng":[10.4036225747637,10.4031855501495,10.402563757283,10.4031274461456,10.4036051313701,10.4036225747637],"lat":[51.7966410543297,51.7964889638942,51.7963980077586,51.7969635328109,51.7968903712013,51.7966410543297]}]],[[{"lng":[10.4031855501495,10.4036225747637,10.4036891286908,10.4038832154272,10.4038509093078,10.4031855501495],"lat":[51.7964889638942,51.7966410543297,51.7966269595187,51.7963890645186,51.7961980660857,51.7964889638942]}]],[[{"lng":[10.4031274461456,10.403074668674,10.4034478532546,10.4036869436682,10.4036051313701,10.4031274461456],"lat":[51.7969635328109,51.7971382165957,51.7972549127377,51.7969628064758,51.7968903712013,51.7969635328109]}]],[[{"lng":[10.4036225747637,10.4036051313701,10.4036869436682,10.4043508490523,10.4038999485561,10.4036891286908,10.4036225747637],"lat":[51.7966410543297,51.7968903712013,51.7969628064758,51.7971004547037,51.7966480426866,51.7966269595187,51.7966410543297]}]],[[{"lng":[10.4066154477032,10.4036360683153,10.4038515949334,10.4042486535501,10.4065579715675,10.4066154477032],"lat":[51.7950848882589,51.7949682161029,51.7961968347999,51.7963028600196,51.7956493862139,51.7950848882589]}]],[[{"lng":[10.4038509093078,10.4038832154272,10.4041845417538,10.4042486535501,10.4038515949334,10.4038509093078],"lat":[51.7961980660857,51.7963890645186,51.7964488176177,51.7963028600196,51.7961968347999,51.7961980660857]}]],[[{"lng":[10.4065266988994,10.4042626885484,10.4042572458999,10.4046767906993,10.4063021696821,10.4065266988994],"lat":[51.7959565207927,51.7965706932373,51.7965774287304,51.7972194127972,51.7981615017577,51.7959565207927]}]],[[{"lng":[10.4065579715675,10.4042486535501,10.4041845417538,10.4042626885484,10.4065266988994,10.4065579715675],"lat":[51.7956493862139,51.7963028600196,51.7964488176177,51.7965706932373,51.7959565207927,51.7956493862139]}]],[[{"lng":[10.4038999485561,10.4042572458999,10.4042626885484,10.4041845417538,10.4038832154272,10.4036891286908,10.4038999485561],"lat":[51.7966480426866,51.7965774287304,51.7965706932373,51.7964488176177,51.7963890645186,51.7966269595187,51.7966480426866]}]],[[{"lng":[10.4042572458999,10.4038999485561,10.4043508490523,10.4046767906993,10.4042572458999],"lat":[51.7965774287304,51.7966480426866,51.7971004547037,51.7972194127972,51.7965774287304]}]]],null,"sf::st_as_sf(voronoi)",{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"pane":"polygon","stroke":true,"color":"#333333","weight":0.5,"opacity":[0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9],"fill":true,"fillColor":["#6CD05E","#00BE7D","#00BE7D","#00BE7D","#00BE7D","#00BE7D","#6CD05E","#007094","#00A890","#FDE333","#4B0055","#185086","#185086","#185086"],"fillOpacity":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6],"smoothFactor":1,"noClip":false},["<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>1&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>10.7&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>2&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>10.6&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>3&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>10.6&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>4&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>10.5&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>5&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>10.4&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>6&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>10.6&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>7&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>10.7&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>8&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td> 9.5&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>9&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>10.0&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>10&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td>11.5&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>11&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td> 8.4&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>12&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td> 9.0&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>13&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td> 9.2&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>14&emsp;<\/td><\/tr><tr><td>1<\/td><th>temp&emsp;<\/th><td> 9.0&emsp;<\/td><\/tr><tr><td>2<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>"],{"maxWidth":800,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"closeOnClick":true,"className":""},["10.7","10.6","10.6","10.5","10.4","10.6","10.7","9.5","10","11.5","8.4","9","9.2","9"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},{"stroke":true,"weight":1,"opacity":0.9,"fillOpacity":0.84,"bringToFront":false,"sendToBack":false}]},{"method":"addHomeButton","args":[10.4007416640621,51.794869120668,10.4066154477032,51.7986690105617,true,"sf::st_as_sf(voronoi)","Zoom to sf::st_as_sf(voronoi)","<strong> sf::st_as_sf(voronoi) <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],["raster(interpNN)","raster(interpIDW)","sf::st_as_sf(voronoi)"],{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#4B0055 , #49125D 3.22580645161289%, #2A4780 19.3548387096774%, #027695 35.4838709677419%, #049F93 51.6129032258064%, #1FC07A 67.741935483871%, #9BD74B 83.8709677419355%, #FDE333 100%, #FDE333 "],"labels":["8.5","9.0","9.5","10.0","10.5","11.0","11.5"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"sf::st_as_sf(voronoi)","extra":{"p_1":0.0322580645161289,"p_n":1},"layerId":null,"className":"info legend","group":"sf::st_as_sf(voronoi)"}]},{"method":"addHomeButton","args":[10.4007416640621,51.794869120668,10.4066154477032,51.7986690105617,true,null,"Zoom to full extent","<strong>Zoom full<\/strong>","bottomleft"]}],"limits":{"lat":[51.7952834681148,51.7982558102761],"lng":[10.4013474458196,10.4059969811846]},"fitBounds":[51.794869120668,10.4007416640621,51.7986690105617,10.4066154477032,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+</div>
+<section id="kriging-with-the-relation-to-the-dgm" class="level3">
+<h3 data-anchor-id="kriging-with-the-relation-to-the-dgm">Kriging with the relation to the DGM</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## universal kriging with gstat </span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we use the terrain model for prediction</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to sp due to gstat</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">=</span> <span class="fu">as</span>(m,<span class="st">"Spatial"</span>)  </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># for all time slots</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="cf">in</span> vars[<span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>]){</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># autofit variogramm for kriging </span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  vm.auto <span class="ot">=</span> automap<span class="sc">::</span><span class="fu">autofitVariogram</span>(<span class="at">formula =</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"altitude"</span>, <span class="st">"~ 1"</span>)),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">input_data =</span> m2)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(vm.auto)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   # kriging   </span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"kriging "</span>, var))</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  var.pred <span class="ot">&lt;-</span> gstat<span class="sc">::</span><span class="fu">krige</span>(<span class="at">formula =</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(var, <span class="st">"~altitude"</span>)),</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>                           <span class="at">locations =</span> m2,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                           <span class="at">newdata =</span> DTM.spdf,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                           <span class="at">model =</span> vm.auto<span class="sc">$</span>var_model,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">debug.level=</span><span class="dv">0</span>,)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>   r<span class="ot">=</span><span class="fu">rasterFromXYZ</span>(<span class="fu">as.data.frame</span>(var.pred)[, <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"var1.pred"</span>)])</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co"># reclassify erratic values</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  reclass_df <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">0</span>, <span class="cn">NA</span>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reshape the object into a matrix with columns and rows</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  reclass_m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(reclass_df,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ncol =</span> <span class="dv">3</span>,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>                      <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  r_c <span class="ot">&lt;-</span> <span class="fu">reclassify</span>(r,reclass_m)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(r_c)</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># re assign crs</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">#crs(r_c) = crs(paste0("EPSG:32633"))</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  raster<span class="sc">::</span><span class="fu">writeRaster</span>(r_c,<span class="fu">paste0</span>(var,<span class="st">"v_interpol.tif"</span>),<span class="at">overwrite=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="mc3_files/figure-html/krige-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "kriging A20230829110000"</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="mc3_files/figure-html/krige-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="mc3_files/figure-html/krige-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "kriging A20230829140000"</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="mc3_files/figure-html/krige-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="mc3_files/figure-html/krige-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "kriging A20230829170000"</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="mc3_files/figure-html/krige-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="mc3_files/figure-html/krige-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "kriging A20230829200000"</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="mc3_files/figure-html/krige-8.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -777,7 +1216,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">xyz (2021)<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/HannaMeyer/EON2023/edit/main/mc_session/mc3.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/HannaMeyer/EON2023/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    <div class="nav-footer-center">xyz (2021)</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
