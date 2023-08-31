@@ -47,9 +47,7 @@ https://cloud.hawk.de/index.php/s/yomQwefzLDwyTa6
 
 You can view UAV-images provided by Dr. Hans Fuchs from University of Göttingen here ( *to view the online maps in Firefox browser you need to accept unsecure connections in the panel left of the url (lock symbol)*):
 
-
 https://wwwuser.gwdg.de/~hfuchs/projekte/polsterberg/
-
 
 # Datasets & Sensors
 ## Datasets
