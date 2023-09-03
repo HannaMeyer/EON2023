@@ -33,13 +33,15 @@ comments: false
 
 We plan to work in the area of the forest district "Claustahl" which is in the west of the City Claustahl-Zellerfeld.
 
+![](https://pad.gwdg.de/uploads/632f2325-7a43-447e-8a23-1eb989b9218f.png)
+
 This forest area was dominate by spruce trees which all died in the last years
 
-![](https://pad.gwdg.de/uploads/bf79ca6d-471c-4d82-9289-5cce78085abb.png)
+![](/images/aoi.png)
 
 
 
-![](https://pad.gwdg.de/uploads/632f2325-7a43-447e-8a23-1eb989b9218f.png)
+
 
 You can download the geopackage with the AOI here:
 
