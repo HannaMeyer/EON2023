@@ -25,31 +25,36 @@ library(geostatsp)
 library(ggthemes)
 library(dplyr)
 # get the data from geospatstat
-data("swissRain")
-# define projection the old way
-crs = raster::crs("+proj=somerc +lat_0=46.9524055555556 +lon_0=7.43958333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=GRS80 +units=m +no_defs")
-downloader::download(url ="https://biogeo.ucdavis.edu/data/gadm3.6/Rsp/gadm36_CHE_0_sp.rds",     destfile = "gadm36_CHE_0_sp.rds")
-ch_vec=readRDS("gadm36_CHE_0_sp.rds")
-swissBorder = spTransform(ch_vec,CRSobj = crs)
+
+area=sf::st_read("mc_session/plot.shp")
+stations=sf::st_read("mc_session/stations_prelim.gpkg")
+statdat = openxlsx::read.xlsx("~/Downloads/all_GW1000A-WIFIFC29(202308290000-202308291731).xlsx")
+area_sp=as(area,"Spatial")
+plotborder= sp::spTransform(area_sp,CRSobj = "EPSG:32633")
+
+statdat$
+# get the extent of switzerland
+extent.harzplot <- raster::extent(plotborder)
+
+
 
 
 # get the extent of switzerland
-extent.switzerland <- extent(swissRain)
+extent.plot<- raster::extent(extent.harzplot)
 
 # gcreate a point data grid  1000m*1000m +border distance
-border = 20000
-s_rain_grid <- expand.grid(x = seq(from = round(extent.switzerland@xmin -  border),
-to = round(extent.switzerland@xmax + border),
-by = 1000),
-y = seq(from = round(extent.switzerland@ymin - border),
-to = round(extent.switzerland@ymax +  border),
-by = 1000))
+plot_grid <- expand.grid(x = seq(from = round(extent.plot@xmin),
+to = round(extent.plot@xmax),
+by = 700),
+y = seq(from = round(extent.plot@ymin),
+to = round(extent.plot@ymax),
+by = 700))
 
-# convert swissrain to terra vvector format
-t_swissRain <- vect(swissRain)
+# convert data to terra vvector format
+plotborder_vect <- terra::vect(plotborder)
 
 # calculate voronoi
-t_swiss_rain_voronoi <- terra::voronoi(t_swissRain)
+t_swiss_rain_voronoi <- terra::voronoi(plotborder_vect )
 # reconvert it
 sf_swiss_rain_voronoi=st_as_sf(t_swiss_rain_voronoi)
 
