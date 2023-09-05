@@ -447,7 +447,7 @@ mapview(raster(interpNN) ,col=rainbow(25)) +
 m2 = as(m,"Spatial")  
 
 # for all time slots
-for (var in vars[6:8]){
+for (var in vars[8:8]){
 # autofit variogramm for kriging 
   vm.auto = automap::autofitVariogram(formula = as.formula(paste("altitude", "~ 1")),
                                       input_data = m2)
@@ -471,7 +471,7 @@ for (var in vars[6:8]){
                       byrow = TRUE)
   r_c = reclassify(r,reclass_m)
 
-  plot(r_c)
+  raster::plot(r_c)
   # re assign crs
   #crs(r_c) = crs(paste0("EPSG:32633"))
   raster::writeRaster(r_c,paste0(var,"v_interpol.tif"),overwrite=TRUE)

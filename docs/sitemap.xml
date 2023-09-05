@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hannameyer.github.io/EON2023/index.html</loc>
-    <lastmod>2023-09-05T09:02:07.910Z</lastmod>
+    <lastmod>2023-09-05T09:13:32.612Z</lastmod>
   </url>
   <url>
     <loc>https://hannameyer.github.io/EON2023/mc_session/mc4.html</loc>
-    <lastmod>2023-09-05T09:05:57.542Z</lastmod>
+    <lastmod>2023-09-05T09:32:15.421Z</lastmod>
   </url>
   <url>
     <loc>https://hannameyer.github.io/EON2023/Machine_Learning_Session/ML_AOA.html</loc>
@@ -14,14 +14,18 @@
   </url>
   <url>
     <loc>https://hannameyer.github.io/EON2023/paul_tutorial/02_ValidationDataCollection.html</loc>
-    <lastmod>2023-09-05T09:05:08.346Z</lastmod>
+    <lastmod>2023-09-05T09:08:39.025Z</lastmod>
   </url>
   <url>
     <loc>https://hannameyer.github.io/EON2023/mc_session/mc1.html</loc>
-    <lastmod>2023-09-05T09:05:29.214Z</lastmod>
+    <lastmod>2023-09-05T09:13:48.881Z</lastmod>
   </url>
   <url>
     <loc>https://hannameyer.github.io/EON2023/mc_session/mc3.html</loc>
-    <lastmod>2023-09-05T09:05:57.286Z</lastmod>
+    <lastmod>2023-09-05T09:50:25.712Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hannameyer.github.io/EON2023/base/faq.html</loc>
+    <lastmod>2023-09-05T09:11:32.302Z</lastmod>
   </url>
 </urlset>

@@ -11,18 +11,14 @@ website:
   search: 
     location: navbar
     type: textbox
-  page-footer: "xyz (2021)" 
+  page-footer: "Earth Observation Network (2023)" 
   twitter-card:
-    creator: "@yxz"
+    creator: "@gisma"
   # comments:
   #   utterances:
   #     repo: yourgithubname/yourreponame
   navbar:
     logo: /images/logooil.jpg
-    left:
-      - icon: question-square-fill
-        text: FAQ
-        href: base/faq.qmd
 
 
   sidebar:
