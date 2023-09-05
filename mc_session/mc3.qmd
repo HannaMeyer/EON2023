@@ -280,10 +280,10 @@ Please download the data from the repository or take the USB-stick
 
 # 0 ---- project setup ----
 
-# basic packages
-library("mapview")
+# load packages (if not installed please install via install.packages())
 library("raster")
 library("terra")
+library("sp")
 library("sf")
 library("dplyr")
 library("lwgeom")
@@ -291,35 +291,50 @@ library("readxl")
 library("highfrequency")
 library("tidyverse")
 library("rprojroot")
+library("tibble")
 library("xts")
-library("sp")
+library("data.table")
+library("mapview")
 
-# get the current folder as base working folder
+# create a string containing the current working directory
 wd=paste0(find_rstudio_root_file(),"/mc_session/data/")
 
 # define time period to aggregate temp dat
 time_period = 3
+
+# multiplication factor for blowing up the Copernicus DEM
+blow_fac = 15
+
 # reference system as proj4 string for old SP package related stuff
-crs = raster::crs("+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs ")
-# names of data files
-fnDTM = paste0(wd,"copernicus_DEM.tif")   # Copernicus DEM
-# Weather Data adapt if you download a new file
+crs = raster::crs("+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs")
+
+# Copernicus DEM (https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1)
+fnDTM = paste0(wd,"copernicus_DEM.tif")  
+
+# Weather Data adapt if you download a new file 
+# https://www.ecowitt.net/home/index?id=20166)
+# https://www.ecowitt.net/home/index?id=149300
 fn_dataFC29 = paste0(wd,"all_GW1000A-WIFIFC29(202308270000-202308292319).xlsx")
 fn_dataDB2F =paste0(wd,"all_GW1000A-WIFIDB2F(202308270000-202308292219).xlsx")
+
 # station data as derived by the field group
 fn_pos_data= paste0(wd,"stations_prelim.shp")
-# arbitrary plot borders just digitized
+
+# arbitrary plot borders just digitized for getting a limiting border of the plot area
 fn_area =paste0(wd,"plot.shp")
+
+# rds file for saving the cleaned up weather data
 cleandata = paste0(wd,"climdata.RDS")
 
 # 1 ---- read data ----
-DTM = terra::rast(fnDTM) # DTM
+# read DEM data
+DTM = terra::rast(fnDTM) # DTM.
 # increase resolution by 15
-DTM=disagg(DTM, fact=c(15, 15)) 
+DTM=disagg(DTM, fact=c(blow_fac, blow_fac)) 
 # cast to SpatialPixelsDataFrame
-DTM.spdf <- as(raster(DTM),'SpatialPixelsDataFrame')
+DTM.spdf = as(raster(DTM),'SpatialPixelsDataFrame')
 # add colname altitude necessary for latter use during kriging
-colnames(DTM.spdf@data) <- "altitude"
+colnames(DTM.spdf@data) = "altitude"
 # fix reference system
 crs(DTM.spdf)=crs
 # read station position data
@@ -328,9 +343,9 @@ crs(DTM.spdf)=crs
 area=st_read(fn_area)
 # reproject the dataset to the project crs
 area=st_transform(area,crs)
-# # read temperature data we need to skip row 1 due to excel format
-clim_dataFC29 <- as_tibble(read_excel(fn_dataFC29, skip = 1)) 
-clim_dataDB2F <- as_tibble(read_excel(fn_dataDB2F, skip = 1))
+# read temperature data we need to skip row 1 due to excel format
+clim_dataFC29 = as_tibble(read_excel(fn_dataFC29, skip = 1)) 
+clim_dataDB2F = as_tibble(read_excel(fn_dataDB2F, skip = 1))
 
 ```
 
@@ -341,8 +356,8 @@ cumbersome part of dealing with data analysis.
 
 ```{r tempdata, message=FALSE, warning=FALSE}
 # select the required cols
-tempFC29 = clim_dataFC29 %>% select(c(1,2,32,36,40,44,48))
-tempDB2F = clim_dataDB2F %>% select(c(1,25,29,33,37,41,45,49,53))
+tempFC29 = clim_dataFC29 %>% dplyr::select(c(1,2,32,36,40,44,48))
+tempDB2F = clim_dataDB2F %>% dplyr::select(c(1,25,29,33,37,41,45,49,53))
 # rename header according to the pos file names and create a merge field time
 names(tempDB2F) = c("time","ch1_r","ch2_r","ch3_r","ch4_r","ch5_r","ch6_r","ch7_r","ch8_r")
 names(tempFC29) = c("time","base","ch1","ch2","ch3","ch4","ch5")
@@ -360,7 +375,7 @@ temp_fin=as_tibble(cbind(nms = names(temp_fin), t(temp_fin)))
 names(temp_fin) = temp_fin[1,]
 temp_fin=temp_fin[-1,]
 # replace names specially time by stationid
-names(temp_fin)[names(temp_fin) == 'time'] <- 'stationid'
+names(temp_fin)[names(temp_fin) == 'time'] = 'stationid'
 # extract altitudes for positions
 pos$altitude= exactextractr::exact_extract(DTM,st_buffer(pos,1),"mean")
 # merge positions and values via id
@@ -405,12 +420,12 @@ Now we can start with the interpolation or any other analysis which deals with r
 
 ```{r , nn_IDW , message=FALSE, warning=FALSE}
 # Nearest neighbor interpolation/Voronoi
-interpNN <- interpNear(r, as.matrix(xyz),radius=100)
-p <- vect(xyz, geom=c("x", "y")) 
-voronoi <- voronoi(p)
+interpNN = interpNear(r, as.matrix(xyz),radius=100)
+p = vect(xyz, geom=c("x", "y")) 
+voronoi = voronoi(p)
 
 # Inverse Distance interpolation
-interpIDW <- interpIDW(r, as.matrix(xyz), radius=100, power=1, smooth=1, maxPoints=5)
+interpIDW = interpIDW(r, as.matrix(xyz), radius=100, power=1, smooth=1, maxPoints=5)
 # recreate CRS assignment
 crs(interpNN ) = crs
 crs(interpIDW ) = crs
@@ -432,7 +447,7 @@ mapview(raster(interpNN) ,col=rainbow(25)) +
 m2 = as(m,"Spatial")  
 
 # for all time slots
-for (var in vars[6:8]){
+for (var in vars[8:8]){
 # autofit variogramm for kriging 
   vm.auto = automap::autofitVariogram(formula = as.formula(paste("altitude", "~ 1")),
                                       input_data = m2)
@@ -440,7 +455,7 @@ for (var in vars[6:8]){
 
 #   # kriging   
   print(paste0("kriging ", var))
-  var.pred <- gstat::krige(formula = as.formula(paste0(var, "~altitude")),
+  var.pred = gstat::krige(formula = as.formula(paste0(var, "~altitude")),
                            locations = m2,
                            newdata = DTM.spdf,
                            model = vm.auto$var_model,
@@ -449,14 +464,14 @@ for (var in vars[6:8]){
    r=rasterFromXYZ(as.data.frame(var.pred)[, c("x", "y", "var1.pred")])
 #   
 # reclassify erratic values
-  reclass_df <- c(-Inf, 0, NA)
+  reclass_df = c(-Inf, 0, NA)
   # reshape the object into a matrix with columns and rows
-  reclass_m <- matrix(reclass_df,
+  reclass_m = matrix(reclass_df,
                       ncol = 3,
                       byrow = TRUE)
-  r_c <- reclassify(r,reclass_m)
+  r_c = reclassify(r,reclass_m)
 
-  plot(r_c)
+  raster::plot(r_c)
   # re assign crs
   #crs(r_c) = crs(paste0("EPSG:32633"))
   raster::writeRaster(r_c,paste0(var,"v_interpol.tif"),overwrite=TRUE)

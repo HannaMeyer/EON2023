@@ -5,8 +5,8 @@ image: ../images/mc4.png
 about:
   id: image-heading
   template: solana
-  image-shape: round
-  image-width: 10em
+  image-shape: rounded
+  image-width: 25em
   links:
     - icon: shop-window
       text: Station inside the dead Fir plot (Ecowitt Dashboard Login required)
