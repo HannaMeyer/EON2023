@@ -372,7 +372,7 @@ RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{ctor. Also today there was wind, not good for
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>((agb_pop<span class="sc">-</span>agb_model),<span class="fu">as_Spatial</span>(p1))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>RMSE_est <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((sample)<span class="sc">^</span><span class="dv">2</span>,<span class="at">na.rm=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The random sample estimates the RMSE as 35.63.</p>
+<p>The random sample estimates the RMSE as 40.43.</p>
 <p>But is this an unbiased estimate?</p>
 </section>
 <section id="simulation-of-many-random-samples" class="level1">
@@ -447,7 +447,7 @@ RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{ctor. Also today there was wind, not good for
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(RMSE_2)<span class="sc">/</span><span class="fu">sd</span>(RMSE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7752871</code></pre>
+<pre><code>[1] 0.7069143</code></pre>
 </div>
 </div>
 </section>
