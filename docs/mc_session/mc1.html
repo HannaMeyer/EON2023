@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EON Summer School 2023 - Microclimate Sensors</title>
+<title>EON Summer School 2023 - Microclimate Sensors &amp; Power supply Units</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,7 +29,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../mc_session/mc2.html" rel="next">
+<link href="../mc_session/mc3.html" rel="next">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -62,11 +62,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../css/styles.css">
-<meta property="og:title" content="EON Summer School 2023 - Microclimate Sensors">
+<meta property="og:title" content="EON Summer School 2023 - Microclimate Sensors &amp; Power supply Units">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://hannameyer.github.io/EON2023/images/froggit_1.jpg">
 <meta property="og:site-name" content="EON Summer School 2023">
-<meta name="twitter:title" content="EON Summer School 2023 - Microclimate Sensors">
+<meta name="twitter:title" content="EON Summer School 2023 - Microclimate Sensors &amp; Power supply Units">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://hannameyer.github.io/EON2023/images/froggit_1.jpg">
 <meta name="twitter:creator" content="@yxz">
@@ -110,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mc_session/mc1.html">Microclimate &amp; Interpolation</a></li><li class="breadcrumb-item"><a href="../mc_session/mc1.html">Microclimate Sensors</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mc_session/mc1.html">Microclimate Data Retrieval &amp; Spatial Data Interpolation</a></li><li class="breadcrumb-item"><a href="../mc_session/mc1.html">Microclimate Sensors &amp; Power supply Units</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -167,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Microclimate &amp; Interpolation</span></a>
+ <span class="menu-text">Microclimate Data Retrieval &amp; Spatial Data Interpolation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -176,13 +176,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../mc_session/mc1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Microclimate Sensors</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../mc_session/mc2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Power Supply</span></a>
+ <span class="menu-text">Microclimate Sensors &amp; Power supply Units</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -232,6 +226,15 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#calibration-concept" id="toc-calibration-concept" class="nav-link" data-scroll-target="#calibration-concept">Calibration Concept</a></li>
   </ul></li>
+  <li><a href="#power-supply-unit" id="toc-power-supply-unit" class="nav-link" data-scroll-target="#power-supply-unit">Power supply Unit</a>
+  <ul class="collapse">
+  <li><a href="#switching-scheme" id="toc-switching-scheme" class="nav-link" data-scroll-target="#switching-scheme">Switching scheme</a></li>
+  <li><a href="#wiring" id="toc-wiring" class="nav-link" data-scroll-target="#wiring">Wiring</a></li>
+  <li><a href="#mounting" id="toc-mounting" class="nav-link" data-scroll-target="#mounting">Mounting</a></li>
+  <li><a href="#station-setup-in-the-field" id="toc-station-setup-in-the-field" class="nav-link" data-scroll-target="#station-setup-in-the-field">Station setup in the field</a></li>
+  <li><a href="#final-check" id="toc-final-check" class="nav-link" data-scroll-target="#final-check">Final check</a></li>
+  <li><a href="#risk-assessment" id="toc-risk-assessment" class="nav-link" data-scroll-target="#risk-assessment">Risk Assessment</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/HannaMeyer/EON2023/edit/main/mc_session/mc1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/HannaMeyer/EON2023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -245,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="entity-contents">
       <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Microclimate Sensors</h1>
+<h1 class="title">Microclimate Sensors &amp; Power supply Units</h1>
 </div>
 <div class="quarto-title-meta">
   </div>
@@ -316,6 +319,82 @@ Future Calibration Plans
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="power-supply-unit" class="level1">
+<h1>Power supply Unit</h1>
+<p>The power supply box is designed to safely supply a range of demanding energy consumers with power. It consists of industry standard components.</p>
+<section id="switching-scheme" class="level2">
+<h2 data-anchor-id="switching-scheme">Switching scheme</h2>
+<p>The battery box has a very simple design. Besides the cabling, it contains a solar charge regulator, a fuse panel for the protection of the consumers and an AGM 120aH battery.</p>
+<p><img src="../images/battery_box/switching_scheme.png" class="img-fluid" style="width:75.0%"> ## Components * Sealable, durable Wham Bam Heavy Duty Box, 62 L, 59,5 x 40 x 37 cm, PP Recycling Plastic <a href="https://www.whatmoreuk.com/product/wham-bam-62l-h-duty-box-lid-black-recycled/">Wham Bam Box</a>. The “Wham Bam Box” made of recycled PP plastic was chosen for its extreme mechanical strength and almost complete biochemical resistance. The bad temperature spectrum for thermal stability is from approx. -10 -140 °C., it is acid and alkali resistant and waterproof. By additionally equipping the box with a fire protection mat, the almost airtight closure offers a virtually complete reduction of fire load inside and outside the box. * 12V deep-cycle battery <a href="https://www.batteriespezialist.de/Solarbatterien/Solar-120Ah-Versorgungsbatterie::422.html">BSA Audio Solar Technologie 120 Ah 12V C100</a> * 3 x <a href="https://www.neutrik.com/en/product/nac3fpx">Neutrik powerCON TRUE1 NAC3FPX</a> outlets and <a href="https://www.neutrik.com/en/product/scnac-fpx">Neutrik SCNAC-FPX</a> sealing cover. * <a href="https://www.ebay.de/i/321606050013">Fuse Box</a> for car fuses up to max. 15A per fuse, maximum 30A per fuse box, With sealed cover, splash-proof, Material: PA6.6, 12 connections on the side * Nominal voltage: 32 V/DC * Nominal current (per output): 15 A * Temperature range: -20 - +85 °C * Connections: Flat plug 8x 6,3 x 0,8 mm lateral * Solar charge controller, 20A (ALLPOWERS, available from various brands) <a href="http://iallpowers.com/index.php?c=product&amp;id=372">Specification ALLPOWERS</a></p>
+</section>
+<section id="wiring" class="level2">
+<h2 data-anchor-id="wiring">Wiring</h2>
+<ul>
+<li>Battery to solar charger:
+<ul>
+<li>Pole terminal connectors (+ and -)</li>
+<li>6 mm<sup>2</sup> cables (red and black)</li>
+<li>2 x Crimp cable shoes</li>
+</ul></li>
+<li>Solar panel to solar charger
+<ul>
+<li>MC4 photovoltaic connectors (+ and -) <a href="https://www.voelkner.de/products/687644/Weidmueller-Photovoltaik-Steckverbinder-PV-Stick-PV-STICK-SET-Schwarz-Inhalt-1St..html">Weidemüller</a></li>
+<li>6 mm<sup>2</sup> cables (red and black)</li>
+<li>2x Crimp cable shoes</li>
+</ul></li>
+<li>Solar charger fuse box outlets
+<ul>
+<li>6 x 1,5 mm<sup>2</sup> cables, red</li>
+<li>6 x 1/4’’ FASTON terminals <a href="https://www.ebay.de/i/321606050013">Fuse Box</a></li>
+<li>3 x 1,5 mm<sup>2</sup> cables, black</li>
+<li>2 x Crimp cable shoes (holding 3 wires)</li>
+<li>6 x 6,35mm / 1/4’’ crimp <a href="https://en.wikipedia.org/wiki/FASTON_terminal">FASTON terminals</a></li>
+</ul></li>
+</ul>
+<p>Please note the following points: * Silicone cables, solar cables, plugs and fuse box fulfills industry standards. All cable lugs are crimped and checked. * The cable lugs are not screwed to the charging cables with cable lugs but through the crimp connection with the end sleeve. * A main fuse (e.g.&nbsp;40A automatic circuit breaker) must be installed</p>
+<p>See also the figure below.</p>
+<p><img src="../images/battery_box/solarcharer_wiring_fuse.jpg" class="img-fluid"></p>
+<p><img src="../images/battery_box/battery_wiring.jpg" class="img-fluid"> <img src="../images/battery_box/battery_fuse.jpg" class="img-fluid"></p>
+</section>
+<section id="mounting" class="level2">
+<h2 data-anchor-id="mounting">Mounting</h2>
+<ul>
+<li>Outlets: 6x M3 screw (12mm), washers and nuts</li>
+<li>Solar connectors: 2 x waterproof cable glands</li>
+<li>Solar charger and fuse box:
+<ul>
+<li>Wooden plate, glued to the box</li>
+<li>4 screws for Solar Charge Controller</li>
+<li>4 screws for fuse box Cable lugs and plugs are covered with self-vulcanizing tape and additionally insulated.</li>
+</ul></li>
+</ul>
+</section>
+<section id="station-setup-in-the-field" class="level2">
+<h2 data-anchor-id="station-setup-in-the-field">Station setup in the field</h2>
+<p>For safe operation, the following points must be taken into account when setting up the box:</p>
+<p>1.) The box must be placed horizontally. Preferable at on a clearing to reduce impacts of falling branches or similar. <img src="../images/battery_box/0_raw_installation.jpg" class="img-fluid"> 2.) One square meter around the box must be cleared of any vegetation and the A-horizon (depending on the slope, even more).</p>
+<p><img src="../images/battery_box/01_cleaning area_from_organic_material.jpg" class="img-fluid"> 3.) Around this area a further strip with a diameter of at least 1 meter must also be cleared of organic material, especially leaves. Dig up the A-horizon and exclude roots and organic stuff. Note that the wiring sections must also be cleared of combustible organic material.</p>
+<p><img src="../images/battery_box/02_cleaning _box_plot_from_vegetation.jpg" class="img-fluid"> 4.) Check cables and screws for proper seating and integrity.</p>
+<p><img src="../images/battery_box/06_check_cables.jpg" class="img-fluid"></p>
+<p>5.) Check proper installation of the solar panel. Mount the panel on a simple wooden slat attached to the frame to avoid damage to the protective foil on the back. Such damage will destroy the panel.</p>
+<p><img src="../images/battery_box/06_simple_rack.jpg" class="img-fluid"></p>
+<p>6.) Attach the solar connectors to the panel. This avoids ground contact and provides good weather protection. This can be done very easily by threading cable ties through the plugs and the junction box. {% include figure image_path=“../images/battery_box/07_solar_plugs.jpg” alt=“Attach the solar connectors to the panel.” %} <img src="../images/battery_box/07_solar_plugs.jpg" class="img-fluid"> 7.) Finally, the box should be secured against unauthorized or accidental opening. For this purpose there is a steel cable with a number lock, which is to be attached in the way it is placed there.</p>
+<p><img src="../images/battery_box/08_safety_cable.jpg" class="img-fluid"></p>
+</section>
+<section id="final-check" class="level2">
+<h2 data-anchor-id="final-check">Final check</h2>
+<ol type="1">
+<li>All contacts and cables must be checked for proper seating and integrity. Especially the charging cables on the battery must be screwed tightly.</li>
+<li>All cables are to be laid without tension.</li>
+<li>The solar cables are to be laid separately to avoid a short circuit, so that an animal crossing etc. does not cause them to come into contact.</li>
+<li>The box is secured and tight.</li>
+</ol>
+</section>
+<section id="risk-assessment" class="level2">
+<h2 data-anchor-id="risk-assessment">Risk Assessment</h2>
+<p>Here you find the preliminary <a href="../images/battery_box/GFB-12V Anlagen_Natur40.pdf">risk assesment</a> for the installation and operation of 12 V solar power based energy supply units and measuring sensor systems.</p>
 
 
 
@@ -684,8 +763,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../mc_session/mc2.html" class="pagination-link">
-        <span class="nav-page-text">Power Supply</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../mc_session/mc3.html" class="pagination-link">
+        <span class="nav-page-text">Spatial Interpolation</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

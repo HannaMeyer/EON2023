@@ -41,10 +41,9 @@ website:
           - paul_tutorial/01_TrainingDataCollection.qmd
           - paul_tutorial/02_ValidationDataCollection.qmd
       - text: "---"
-      - section: "Microclimate & Interpolation"
+      - section: "Microclimate Data Retrieval & Spatial Data Interpolation"
         contents:
           - mc_session/mc1.qmd
-          - mc_session/mc2.qmd
           - mc_session/mc3.qmd
           - mc_session/mc4.qmd
       - text: "---"
