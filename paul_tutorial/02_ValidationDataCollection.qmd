@@ -4,10 +4,9 @@ title: "Collection of validation data in the context of remote sensing based
 subtitle: "Tutorial for the EON Summer School 2023"
 author: Paul Magdon[University of Applied Sciences and Arts (HAWK), paul.magdon@hawk.de]
 date: "2023-29-08"
-
 ---
 
-```{r setup, include=FALSE}
+```{r setup}
 library(rmarkdown)
 
 library(sf)
@@ -39,7 +38,7 @@ error free representation of the population. Additionally we use a second map
 (agb_model) compiled using a machine learning model (RF) also depicting the AGB 
 distribution. 
 
-```{r import, cache=TRUE}
+```{r import}
 
 np_boundary = st_transform(st_read("data/nlp-harz_aussengrenze.gpkg"),25832)
 
@@ -54,7 +53,7 @@ population we can calculate the Root mean Square Error (RMSE) as the difference
 between the model predictions $\hat{z(x_i)}$ and the population map with:
 
 $$
-RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{i})-\hat{z}(x_{i}))^2}}
+RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{ctor. Also today there was wind, not good for m3 i})-\hat{z}(x_{i}))^2}}
 $$
 ```{r RMSE}
 RMSE_pop = sqrt(cellStats((agb_pop-agb_model)^2, mean))
@@ -92,7 +91,7 @@ But is this an unbiased estimate?
 To check if our sample based estimates are unbiased we will repeat the sampling
 $k$ times. 
 
-```{r simulation, cache=TRUE}
+```{r simulation}
 dif <- as((agb_pop-agb_model), 'SpatialGridDataFrame')
 seed<- 12324
 
@@ -170,7 +169,7 @@ inventories for the following reasons:
 * Easy to establish and to document
 * Ensures a balanced spatial coverage
 
-```{r systematicSample, cache=TRUE}
+```{r systematicSample}
 p1 = spsample(as_Spatial(np_boundary),n=n,type='regular')
 
 plot(np_boundary$geom)
@@ -179,7 +178,7 @@ plot(p1, add=T)
 
 
 
-```{r SystematicSimlation, cache=TRUE}
+```{r SystematicSimlation}
 k <- 500
 n <- 100
 RMSE_3 <- rep(0,k) 
