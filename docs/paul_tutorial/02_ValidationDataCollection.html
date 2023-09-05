@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="twitter:title" content="EON Summer School 2023 - Collection of validation data in the context of remote sensing based forest monitoring">
 <meta name="twitter:description" content="Tutorial for the EON Summer School 2023">
 <meta name="twitter:image" content="https://hannameyer.github.io/EON2023/paul_tutorial/02_ValidationDataCollection_files/figure-html/RMSEest-1.png">
-<meta name="twitter:creator" content="@yxz">
+<meta name="twitter:creator" content="@gisma">
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="1344">
 <meta name="twitter:card" content="summary_large_image">
@@ -130,22 +130,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">EON Summer School 2023</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../base/faq.html" rel="" target=""><i class="bi bi-question-square-fill" role="img">
-</i> 
- <span class="menu-text">FAQ</span></a>
-  </li>  
-</ul>
-            <div class="quarto-navbar-tools ms-auto">
+        <div class="quarto-navbar-tools ms-auto">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
+          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
@@ -323,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>np_boundary <span class="ot">=</span> <span class="fu">st_transform</span>(<span class="fu">st_read</span>(<span class="st">"data/nlp-harz_aussengrenze.gpkg"</span>),<span class="dv">25832</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `nlp-harz_aussengrenze' from data source 
-  `/home/creu/edu/summerschool2023/EON2023/paul_tutorial/data/nlp-harz_aussengrenze.gpkg' 
+  `/home/creu/edu/EON/EON2023/paul_tutorial/data/nlp-harz_aussengrenze.gpkg' 
   using driver `GPKG'
 Simple feature collection with 1 feature and 3 fields
 Geometry type: MULTIPOLYGON
@@ -361,7 +349,7 @@ RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{i})-\hat{z}(x_{i}))^2}}
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>((agb_pop<span class="sc">-</span>agb_model),<span class="fu">as_Spatial</span>(p1))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>RMSE_est <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((sample)<span class="sc">^</span><span class="dv">2</span>,<span class="at">na.rm=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The random sample estimates the RMSE as 43.4.</p>
+<p>The random sample estimates the RMSE as 41.58.</p>
 <p>But is this an unbiased estimate?</p>
 </section>
 <section id="simulation-of-many-random-samples" class="level1">
@@ -432,7 +420,7 @@ RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{i})-\hat{z}(x_{i}))^2}}
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(RMSE_2)<span class="sc">/</span><span class="fu">sd</span>(RMSE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7069502</code></pre>
+<pre><code>[1] 0.7458107</code></pre>
 </div>
 </div>
 </section>
@@ -863,7 +851,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">xyz (2021)</div>
+    <div class="nav-footer-center">Earth Observation Network (2023)</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
