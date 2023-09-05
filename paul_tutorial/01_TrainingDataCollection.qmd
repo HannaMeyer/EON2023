@@ -21,6 +21,7 @@ library(ggplot2)
 library(patchwork)
 library(mapview)
 library(kableExtra)
+library(rmarkdown)
 
 #setwd('E:/EON_2023//tutorial/')
 ```
