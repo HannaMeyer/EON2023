@@ -8,12 +8,14 @@ date: "2023-29-08"
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
+library(rmarkdown)
 knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
 
 library(sf)
 library(raster)
 library(ggplot2)
-library(rmarkdown)
+
 
 ```
 
