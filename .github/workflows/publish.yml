@@ -13,13 +13,6 @@ jobs:
         
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          # To install LaTeX to build PDF book 
-          tinytex: true 
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: rmarkdown
 
       - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
