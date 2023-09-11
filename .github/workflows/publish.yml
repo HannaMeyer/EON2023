@@ -18,12 +18,7 @@ jobs:
      # instead, we're handling dependencies with renv
       - name: Cache packages
         uses: actions/cache@v1
-        with:
-          path: ${{ env.RENV_PATHS_ROOT }}
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
-     
+        
      # note! have to add the rcmdcheck install
       - name: Restore packages
         shell: Rscript {0}
@@ -31,7 +26,7 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
           renv::install('rcmdcheck')
-
+          renv::install('rmarkdown')
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
