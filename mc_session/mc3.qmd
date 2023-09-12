@@ -339,6 +339,8 @@ DTM = terra::rast(fnDTM) # DTM.
 DTM=disagg(DTM, fact=c(blow_fac, blow_fac)) 
 #rename layer to altitude
 names(DTM)="altitude"
+r=DTM*0
+
 # read station position data
  pos=st_read(fn_pos_data)
  # read station position data
