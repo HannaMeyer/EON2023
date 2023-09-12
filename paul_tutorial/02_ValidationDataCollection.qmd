@@ -13,7 +13,8 @@ library(rmarkdown)
 library(sf)
 library(raster)
 library(ggplot2)
-
+library("rprojroot")
+wd=paste0(find_rstudio_root_file(),"/paul_tutorial/data/")
 
 ```
 
@@ -41,11 +42,11 @@ distribution.
 
 ```{r import}
 
-np_boundary = st_transform(st_read("data/nlp-harz_aussengrenze.gpkg"),25832)
+np_boundary = st_transform(st_read(paste0(wd,"nlp-harz_aussengrenze.gpkg")),25832)
 
-agb_pop <- raster("data/agb_np_harz_truth.tif")
+agb_pop <- raster(paste0(wd,"agb_np_harz_truth.tif"))
 
-agb_model <-raster("data/agb_np_harz_model.tif")
+agb_model <-raster(paste0(wd,"agb_np_harz_model.tif"))
 
 ```
 

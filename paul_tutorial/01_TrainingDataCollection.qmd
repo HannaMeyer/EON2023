@@ -3,24 +3,26 @@ title: "Collection of training data for remote sensing model building"
 subtitle: "Tutorial: EON Summer School 2023"
 author: Paul Magdon, University of Applied Sciences and Arts (HAWK)
 date: "2023-08-29"
-
+editor_options: 
+  chunk_output_type: console
 ---
 
 
 
 ```{r setup}
+
 #install.packages("devtools")
 library(sf)
 library(RStoolbox)
 library(raster)
 library(knitr)
-library(ggplot2)library(rmarkdown)
+library(ggplot2)
+library(rmarkdown)
 library(patchwork)
 library(mapview)
 library(kableExtra)
 library(rmarkdown)
-
-#setwd('E:/EON_2023//tutorial/')
+library("rprojroot")
 ```
 
 # Data sets
@@ -32,11 +34,14 @@ the following link:
 [S2-download](https://cloud.hawk.de/index.php/s/Sn2f8bg8GQEqJXR/download/S2B_MSIL2A_20220618T102559_N0400_R10_resampled_harz_np.tif).
 Place this file into the data folder of this tutorial. 
 
-```{r dataimport, cache=TRUE}
-#Import the boundary of the n
-np_boundary = st_transform(st_read("data/nlp-harz_aussengrenze.gpkg"),25832)
+```{r dataimport}
+# create a string containing the current working directory
+wd=paste0(find_rstudio_root_file(),"/paul_tutorial/data/")
 
-s2  <- raster::brick("data/S2B_MSIL2A_20220618T102559_N0400_R10_resampled_harz_np.tif")
+#Import the boundary of the n
+np_boundary = st_transform(st_read(paste0(wd,"nlp-harz_aussengrenze.gpkg")),25832)
+
+s2  <- raster::brick(paste0(wd,"S2B_MSIL2A_20220618T102559_N0400_R10_resampled_harz_np.tif"))
 
 names(s2)<-c('blue','green','red','vnir1','vnir2','vnir3','nir1','nir2','swir')
 
@@ -56,7 +61,7 @@ also ensure, that we cover the spectral range with our sampling.
 In a fist step we reduce the dimensions of the 9 Sentinel-2 bands while 
 maintaining most of the information, using a principal component analysis (PCA).
 
-```{r pca, cache=T}
+```{r pca}
 
 #PCA
 pca<-RStoolbox::rasterPCA(s2,nSamples = 5000, spca=TRUE )
@@ -121,7 +126,6 @@ kable(samples@data[c('x','y','class')], caption='Training plot list') %>%
 ```{r plotDesign}
 # Create a training data set by extracting the mean value of all pixels touching
 # a buffered area with 13m around the plot center
-
 train<-raster::extract(s2,samples,sp=T,buffer=13,fun='mean')
 mapview(train, zcol="class",
         map.types = c("Esri.WorldShadedRelief", "OpenStreetMap.DE"))+
