@@ -28,14 +28,23 @@ For this tutorial we need the raster package for processing of the satellite dat
 ```{r start, message=FALSE, warning=FALSE}
 rm(list=ls())
 #major required packages:
-library(devtools)
-install_github("HannaMeyer/CAST")
+
+require(devtools)
+devtools::install_github("HannaMeyer/CAST")
+
+library(raster)
 library(terra)
 library(caret)
+library(randomForest)
+library(twosamples)
 library(mapview)
 library(sf)
 library(CAST)
 library(tmap)
+library(rprojroot)
+
+# create a string containing the current working directory
+wd = paste0(find_rstudio_root_file(),"/Machine_Learning_Session/data/")
 
 ```
 
@@ -49,7 +58,7 @@ To start with, let's load and explore the remote sensing raster data as well as 
 ### Raster data (predictor variables)
 
 ```{r load, message=FALSE,warning=FALSE}
-mof_sen <- rast("data/sentinel_uniwald.grd")
+mof_sen <- rast(paste0(wd,"sentinel_uniwald.grd"))
 print(mof_sen)
 ```
 
@@ -66,14 +75,14 @@ plotRGB(mof_sen,r=3,g=2,b=1,stretch="lin")
 The vector file is read as sf object. It contains the training sites that will be regarded here as a ground truth for the land cover classification.
 
 ```{r loadPoly}
-trainSites <- read_sf("data/trainingsites_LUC.gpkg")
+trainSites <- read_sf(paste0(wd,"trainingsites_LUC.gpkg"))
 ```
 
 
 Using mapview we can visualize the aerial image channels in the geographical context and overlay it with the polygons. Click on the polygons to see which land cover class is assigned to a respective polygon.
 
 ```{r visMV, warning=FALSE, message= FALSE}
-mapview(as(mof_sen[[1]],"Raster"), map.types = "Esri.WorldImagery")+
+mapview(raster(mof_sen[[1]]), map.types = "Esri.WorldImagery") +
   mapview(trainSites)
 ```
 
@@ -177,7 +186,7 @@ model <- ffs(trainDat[,predictors],
              metric="Kappa",
              trControl=ctrl,
              importance=TRUE,
-             ntree=75,
+             ntree=200,
              verbose=FALSE)
 ```
 
@@ -267,7 +276,7 @@ prediction_LAI <- predict(mof_sen,model_lm,na.rm=T)
 plot(prediction_LAI)
 
 limodelpred <- -0.8518+mof_sen$NDVI*6.8433
-mapview(as(limodelpred,"Raster"))
+mapview(raster(limodelpred))
 ```
 
 
