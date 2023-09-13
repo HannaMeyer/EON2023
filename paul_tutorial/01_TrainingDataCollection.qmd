@@ -12,6 +12,7 @@ editor_options:
 ```{r setup}
 
 #install.packages("devtools")
+devtools::install_github("bleutner/RStoolbox")
 library(sf)
 library(RStoolbox)
 library(raster)

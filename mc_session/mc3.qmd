@@ -276,7 +276,7 @@ Learning!](https://youtu.be/reY50t2hbuM) (6:17)
 
 Please download the data from the repository or take the USB-stick
 
-```{r start, message=FALSE, warning=FALSE}
+```{r setup, message=FALSE, warning=FALSE}
 #------------------------------------------------------------------------------
 # Author: creuden@gmail.com
 # Description:  interpolates the air temp
