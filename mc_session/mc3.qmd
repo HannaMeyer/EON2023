@@ -1,5 +1,8 @@
 ---
 title: "Spatial Interpolation"
+subtitle: "Tutorial: EON Summer School 2023"
+author: Chris Reudenbach, Philipps University Marburg (PUM)
+date: "2023-08-30"
 image: ../images/mc3.png
 about:
   id: image-heading
@@ -9,6 +12,8 @@ about:
 editor: 
   markdown: 
     wrap: 72
+editor_options: 
+  chunk_output_type: console
 ---
 
 ::: {#image-heading}
@@ -271,7 +276,7 @@ Learning!](https://youtu.be/reY50t2hbuM) (6:17)
 
 Please download the data from the repository or take the USB-stick
 
-```{r start, message=FALSE, warning=FALSE}
+```{r setup, message=FALSE, warning=FALSE}
 #------------------------------------------------------------------------------
 # Author: creuden@gmail.com
 # Description:  interpolates the air temp
@@ -295,6 +300,8 @@ library("tibble")
 library("xts")
 library("data.table")
 library("mapview")
+library(stars)
+library(gstat)
 
 # create a string containing the current working directory
 wd=paste0(find_rstudio_root_file(),"/mc_session/data/")
@@ -307,6 +314,7 @@ blow_fac = 15
 
 # reference system as proj4 string for old SP package related stuff
 crs = raster::crs("+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs")
+sfcrs <- st_crs("EPSG:32633")
 
 # Copernicus DEM (https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1)
 fnDTM = paste0(wd,"copernicus_DEM.tif")  
@@ -327,16 +335,15 @@ fn_area =paste0(wd,"plot.shp")
 cleandata = paste0(wd,"climdata.RDS")
 
 # 1 ---- read data ----
+# read_sf("data/de_nuts1.gpkg") |> st_transform(crs) -> de
 # read DEM data
 DTM = terra::rast(fnDTM) # DTM.
 # increase resolution by 15
 DTM=disagg(DTM, fact=c(blow_fac, blow_fac)) 
-# cast to SpatialPixelsDataFrame
-DTM.spdf = as(raster(DTM),'SpatialPixelsDataFrame')
-# add colname altitude necessary for latter use during kriging
-colnames(DTM.spdf@data) = "altitude"
-# fix reference system
-crs(DTM.spdf)=crs
+#rename layer to altitude
+names(DTM)="altitude"
+r=DTM*0
+
 # read station position data
  pos=st_read(fn_pos_data)
  # read station position data
@@ -387,6 +394,8 @@ n= gsub(x = n,pattern = ":",replacement = "")
 n= gsub(x = n,pattern = "2023",replacement = "A2023")
 # and rename couse this as new names
 names(m)=n
+m= st_transform(m,sfcrs)
+
 saveRDS(m,cleandata)
 ```
 
@@ -401,39 +410,54 @@ vars
 # convert final sf vector to terra vector
 temperature_vect = vect(m)
 temperature_vect 
-# create  template raster
-r=DTM *0
-# create table containing x, y, value  to interpolate this values in space
+# create table containing x, y, value (A20230829220000) to interpolate this values in space
 xyz=cbind(geom(temperature_vect)[,3],geom(temperature_vect)[,4],as.numeric(temperature_vect$A20230829220000))
-# the same just for x,y
-xy=cbind(geom(temperature_vect)[,3],geom(temperature_vect)[,4])
-#the same just for z
-z=as.numeric(temperature_vect$A20230829220000)
 # convert to data frame and name header
 xyz=data.frame(xyz)
 names(xyz) =c("x","y","temp")
 xyz
+
+# the same just for x,y
+xy=cbind(geom(temperature_vect)[,3],geom(temperature_vect)[,4])
+#the same just for z
+z=as.numeric(temperature_vect$A20230829220000)
 ```
 
 # Basic Interpolations
 Now we can start with the interpolation or any other analysis which deals with respect to the cleaned Weather data
 
 ```{r , nn_IDW , message=FALSE, warning=FALSE}
-# Nearest neighbor interpolation/Voronoi
-interpNN = interpNear(r, as.matrix(xyz),radius=100)
+# -terra package
+# Voronoi Segmentation
 p = vect(xyz, geom=c("x", "y")) 
 voronoi = voronoi(p)
 
-# Inverse Distance interpolation
-interpIDW = interpIDW(r, as.matrix(xyz), radius=100, power=1, smooth=1, maxPoints=5)
-# recreate CRS assignment
-crs(interpNN ) = crs
-crs(interpIDW ) = crs
-crs(voronoi) = crs
+# Nearest neighbor interpolation
+interpNN = interpNear(r, as.matrix(xyz),radius=100)
 
+# Inverse Distance interpolation
+interpIDW = interpIDW(r, as.matrix(xyz), radius=300, power=2, smooth=1, maxPoints=3)
+# ploting
+plot(interpIDW)
+
+# -gstat package
+# Inverse Distance interpolation
+idw_gstat <- gstat::idw(A20230829220000~1, m, st_as_stars(r),nmin = 3, maxdist = 100, idp = 2.0)
+# ploting
+plot(idw_gstat)
+
+# kriging
+vm.auto = automap::autofitVariogram(formula = as.formula(paste("altitude", "~ 1")),
+                                      input_data = m)
+k <- krige(A20230829220000 ~ altitude, m, st_as_stars(DTM),
+                           vm.auto$var_model)
+plot(k)
+
+crs(voronoi)=crs
 # map it
 mapview(raster(interpNN) ,col=rainbow(25)) + 
  mapview( raster(interpIDW),col=rainbow(25)) + 
+  mapview(k,col=rainbow(25))+
    sf::st_as_sf(voronoi) 
 ```
 
@@ -443,39 +467,23 @@ mapview(raster(interpNN) ,col=rainbow(25)) +
 
 ## universal kriging with gstat 
 # we use the terrain model for prediction
-# convert to sp due to gstat
-m2 = as(m,"Spatial")  
+
 
 # for all time slots
-for (var in vars[8:8]){
-# autofit variogramm for kriging 
+for (var in vars[7:8]){
+  # autofit variogramm for kriging 
   vm.auto = automap::autofitVariogram(formula = as.formula(paste("altitude", "~ 1")),
-                                      input_data = m2)
- plot(vm.auto)
-
-#   # kriging   
+                                      input_data = m)
+  plot(vm.auto)
+  
+  #   # kriging   
   print(paste0("kriging ", var))
-  var.pred = gstat::krige(formula = as.formula(paste0(var, "~altitude")),
-                           locations = m2,
-                           newdata = DTM.spdf,
-                           model = vm.auto$var_model,
-                           debug.level=0,)
-
-   r=rasterFromXYZ(as.data.frame(var.pred)[, c("x", "y", "var1.pred")])
-#   
-# reclassify erratic values
-  reclass_df = c(-Inf, 0, NA)
-  # reshape the object into a matrix with columns and rows
-  reclass_m = matrix(reclass_df,
-                      ncol = 3,
-                      byrow = TRUE)
-  r_c = reclassify(r,reclass_m)
-
-  raster::plot(r_c)
-  # re assign crs
-  #crs(r_c) = crs(paste0("EPSG:32633"))
-  raster::writeRaster(r_c,paste0(var,"v_interpol.tif"),overwrite=TRUE)
-
+  k <- krige( as.formula(paste(var, " ~ altitude")), m, st_as_stars(DTM),
+              vm.auto$var_model)
+  plot(k)
+  # save to geotiff
+  stars::write_stars(k,paste0(wd,var,"v_interpol.tif"),overwrite=TRUE)
+  
 }
 
 

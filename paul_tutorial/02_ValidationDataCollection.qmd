@@ -4,19 +4,17 @@ title: "Collection of validation data in the context of remote sensing based
 subtitle: "Tutorial for the EON Summer School 2023"
 author: Paul Magdon[University of Applied Sciences and Arts (HAWK), paul.magdon@hawk.de]
 date: "2023-29-08"
-output:
-  rmarkdown::html_document:
-    toc: true
-editor_options: 
-  chunk_output_type: console
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
+
+```{r setup}
+library(rmarkdown)
 
 library(sf)
 library(raster)
 library(ggplot2)
+library("rprojroot")
+wd=paste0(find_rstudio_root_file(),"/paul_tutorial/data/")
 
 ```
 
@@ -42,13 +40,13 @@ error free representation of the population. Additionally we use a second map
 (agb_model) compiled using a machine learning model (RF) also depicting the AGB 
 distribution. 
 
-```{r import, cache=TRUE}
+```{r import}
 
-np_boundary = st_transform(st_read("data/nlp-harz_aussengrenze.gpkg"),25832)
+np_boundary = st_transform(st_read(paste0(wd,"nlp-harz_aussengrenze.gpkg")),25832)
 
-agb_pop <- raster("data/agb_np_harz_truth.tif")
+agb_pop <- raster(paste0(wd,"agb_np_harz_truth.tif"))
 
-agb_model <-raster("data/agb_np_harz_model.tif")
+agb_model <-raster(paste0(wd,"agb_np_harz_model.tif"))
 
 ```
 
@@ -57,7 +55,7 @@ population we can calculate the Root mean Square Error (RMSE) as the difference
 between the model predictions $\hat{z(x_i)}$ and the population map with:
 
 $$
-RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{i})-\hat{z}(x_{i}))^2}}
+RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{ctor. Also today there was wind, not good for m3 i})-\hat{z}(x_{i}))^2}}
 $$
 ```{r RMSE}
 RMSE_pop = sqrt(cellStats((agb_pop-agb_model)^2, mean))
@@ -95,7 +93,7 @@ But is this an unbiased estimate?
 To check if our sample based estimates are unbiased we will repeat the sampling
 $k$ times. 
 
-```{r simulation, cache=TRUE}
+```{r simulation}
 dif <- as((agb_pop-agb_model), 'SpatialGridDataFrame')
 seed<- 12324
 
@@ -173,7 +171,7 @@ inventories for the following reasons:
 * Easy to establish and to document
 * Ensures a balanced spatial coverage
 
-```{r systematicSample, cache=TRUE}
+```{r systematicSample}
 p1 = spsample(as_Spatial(np_boundary),n=n,type='regular')
 
 plot(np_boundary$geom)
@@ -182,7 +180,7 @@ plot(p1, add=T)
 
 
 
-```{r SystematicSimlation, cache=TRUE}
+```{r SystematicSimlation}
 k <- 500
 n <- 100
 RMSE_3 <- rep(0,k) 
